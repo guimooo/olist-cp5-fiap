@@ -1,0 +1,217 @@
+etapa,tabela,verificacao,valor,detalhe,granularidade
+01_inventario,orders,linhas,99441,olist_orders_dataset.csv,verificacao
+01_inventario,items,linhas,112650,olist_order_items_dataset.csv,verificacao
+01_inventario,reviews,linhas,99224,olist_order_reviews_dataset.csv,verificacao
+01_inventario,customers,linhas,99441,olist_customers_dataset.csv,verificacao
+01_inventario,sellers,linhas,3095,olist_sellers_dataset.csv,verificacao
+01_inventario,products,linhas,32951,olist_products_dataset.csv,verificacao
+01_inventario,payments,linhas,103886,olist_order_payments_dataset.csv,verificacao
+01_inventario,category_translation,linhas,71,product_category_name_translation.csv,verificacao
+01_inventario,geolocation,linhas,1000163,olist_geolocation_dataset.csv,verificacao
+01_inventario,orders,nulos::order_approved_at,160,0.161% das linhas,verificacao
+01_inventario,orders,nulos::order_delivered_carrier_date,1783,1.793% das linhas,verificacao
+01_inventario,orders,nulos::order_delivered_customer_date,2965,2.982% das linhas,verificacao
+01_inventario,reviews,nulos::review_comment_title,87656,88.342% das linhas,verificacao
+01_inventario,reviews,nulos::review_comment_message,58247,58.703% das linhas,verificacao
+01_inventario,products,nulos::product_category_name,610,1.851% das linhas,verificacao
+01_inventario,products,nulos::product_name_lenght,610,1.851% das linhas,verificacao
+01_inventario,products,nulos::product_description_lenght,610,1.851% das linhas,verificacao
+01_inventario,products,nulos::product_photos_qty,610,1.851% das linhas,verificacao
+01_inventario,products,nulos::product_weight_g,2,0.006% das linhas,verificacao
+01_inventario,products,nulos::product_length_cm,2,0.006% das linhas,verificacao
+01_inventario,products,nulos::product_height_cm,2,0.006% das linhas,verificacao
+01_inventario,products,nulos::product_width_cm,2,0.006% das linhas,verificacao
+01_inventario,orders,duplicatas_chave::order_id,0,,verificacao
+01_inventario,orders,linhas_totalmente_duplicadas,0,,verificacao
+01_inventario,customers,duplicatas_chave::customer_id,0,,verificacao
+01_inventario,customers,linhas_totalmente_duplicadas,0,,verificacao
+01_inventario,sellers,duplicatas_chave::seller_id,0,,verificacao
+01_inventario,sellers,linhas_totalmente_duplicadas,0,,verificacao
+01_inventario,products,duplicatas_chave::product_id,0,,verificacao
+01_inventario,products,linhas_totalmente_duplicadas,0,,verificacao
+01_inventario,items,duplicatas_chave::order_id+order_item_id,0,,verificacao
+01_inventario,items,linhas_totalmente_duplicadas,0,,verificacao
+01_inventario,payments,duplicatas_chave::order_id+payment_sequential,0,,verificacao
+01_inventario,payments,linhas_totalmente_duplicadas,0,,verificacao
+01_inventario,reviews,duplicatas_chave::review_id,814,,verificacao
+01_inventario,reviews,linhas_totalmente_duplicadas,0,,verificacao
+01_inventario,category_translation,duplicatas_chave::product_category_name,0,,verificacao
+01_inventario,category_translation,linhas_totalmente_duplicadas,0,,verificacao
+01_inventario,reviews,pedidos_com_mais_de_uma_avaliacao,547,,verificacao
+01_inventario,reviews,review_id_e_order_id_duplicados,0,,verificacao
+01_inventario,geolocation,linhas_totalmente_duplicadas,261831,tabela não é usada nos KPIs,verificacao
+01_inventario,orders,status::delivered,96478,,verificacao
+01_inventario,orders,status::shipped,1107,,verificacao
+01_inventario,orders,status::canceled,625,,verificacao
+01_inventario,orders,status::unavailable,609,,verificacao
+01_inventario,orders,status::invoiced,314,,verificacao
+01_inventario,orders,status::processing,301,,verificacao
+01_inventario,orders,status::created,5,,verificacao
+01_inventario,orders,status::approved,2,,verificacao
+01_inventario,reviews,notas_fora_de_1_5,0,,verificacao
+01_inventario,items,price_negativo,0,,verificacao
+01_inventario,items,price_zero,0,,verificacao
+01_inventario,items,freight_value_negativo,0,,verificacao
+01_inventario,items,freight_value_zero,383,,verificacao
+01_inventario,payments,payment_value_negativo,0,,verificacao
+01_inventario,orders,data_invalida::order_purchase_timestamp,0,texto presente mas não conversível,verificacao
+01_inventario,orders,data_invalida::order_approved_at,0,texto presente mas não conversível,verificacao
+01_inventario,orders,data_invalida::order_delivered_carrier_date,0,texto presente mas não conversível,verificacao
+01_inventario,orders,data_invalida::order_delivered_customer_date,0,texto presente mas não conversível,verificacao
+01_inventario,orders,data_invalida::order_estimated_delivery_date,0,texto presente mas não conversível,verificacao
+01_inventario,items,data_invalida::shipping_limit_date,0,texto presente mas não conversível,verificacao
+01_inventario,reviews,data_invalida::review_creation_date,0,texto presente mas não conversível,verificacao
+01_inventario,reviews,data_invalida::review_answer_timestamp,0,texto presente mas não conversível,verificacao
+01_inventario,orders,aprovacao_antes_da_compra,0,,verificacao
+01_inventario,orders,postagem_antes_da_compra,166,,verificacao
+01_inventario,orders,entrega_cliente_antes_da_postagem,23,,verificacao
+01_inventario,orders,entrega_cliente_antes_da_compra,0,,verificacao
+01_inventario,orders,delivered_sem_data_entrega_cliente,8,,verificacao
+01_inventario,orders,delivered_sem_data_postagem,2,,verificacao
+01_inventario,relacionamentos,chave_sem_correspondencia::orders.customer_id -> customers,0,,verificacao
+01_inventario,relacionamentos,chave_sem_correspondencia::items.order_id -> orders,0,,verificacao
+01_inventario,relacionamentos,chave_sem_correspondencia::items.seller_id -> sellers,0,,verificacao
+01_inventario,relacionamentos,chave_sem_correspondencia::items.product_id -> products,0,,verificacao
+01_inventario,relacionamentos,chave_sem_correspondencia::reviews.order_id -> orders,0,,verificacao
+01_inventario,relacionamentos,chave_sem_correspondencia::products.category -> translation,13,,verificacao
+01_inventario,relacionamentos,itens por pedido (max),21,,verificacao
+01_inventario,relacionamentos,sellers distintos por pedido (max),5,,verificacao
+01_inventario,relacionamentos,pedidos com >1 seller,1278,,verificacao
+01_inventario,relacionamentos,avaliacoes por pedido (max),3,,verificacao
+01_inventario,relacionamentos,pagamentos por pedido (max),29,,verificacao
+01_inventario,relacionamentos,pedidos sem itens,775,,verificacao
+01_inventario,relacionamentos,pedidos sem avaliação,768,,verificacao
+01_inventario,relacionamentos,orders.customer_id duplicado,0,,verificacao
+01_inventario,customers,ufs_distintas,27,,verificacao
+01_inventario,customers,ufs_fora_do_mapa_regiao,0,,verificacao
+02_preparacao,pipeline,pedidos_base_total,99441,,verificacao
+02_preparacao,pipeline,descarte_status_diferente_de_delivered,2963,,verificacao
+02_preparacao,pipeline,descarte_delivered_fora_do_periodo,21697,"delivered, mas fora de jan-ago/2017 e jan-ago/2018",verificacao
+02_preparacao,pipeline,pedidos_no_recorte_2017,21998,referência da proposta: 21998,verificacao
+02_preparacao,pipeline,pedidos_no_recorte_2018,52783,referência da proposta: 52783,verificacao
+02_preparacao,pipeline,pedidos_recorte_com_multiplas_avaliacoes,391,mantida a mais recente,verificacao
+02_preparacao,pipeline,pedidos_recorte_sem_avaliacao,476,fora do denominador do KPI1,verificacao
+02_preparacao,pipeline,itens_no_recorte,85267,,verificacao
+02_preparacao,pipeline,itens_sem_categoria,1139,mantidos como 'sem_categoria',verificacao
+02_preparacao,pipeline,itens_categoria_sem_traducao,22,nome original mantido,verificacao
+02_preparacao,pipeline,itens_frete_zero,380,"valor válido (frete grátis), mantido",verificacao
+02_preparacao,pipeline,pedidos_recorte_sem_itens,0,,verificacao
+02_preparacao,pipeline,kpi3_excluido_sem_data_postagem,1,,verificacao
+02_preparacao,pipeline,kpi3_excluido_sem_prazo_limite,0,pedido sem itens,verificacao
+02_preparacao,pipeline,postagem_antes_da_compra_no_recorte,165,data incoerente; mantido (não altera o lado do prazo),verificacao
+02_preparacao,pipeline,atraso_entrega_excluido_sem_data_entrega,7,,verificacao
+02_preparacao,pipeline,linhas_pedido_seller,75845,74781 pedidos únicos,verificacao
+02_preparacao,pipeline,pedidos_com_mais_de_uma_categoria,613,,verificacao
+07_validacao,pipeline,pedidos: 1 linha por order_id,1,OK 74781 linhas,verificacao
+07_validacao,pipeline,itens: 1 linha por order_id+order_item_id,1,OK ,verificacao
+07_validacao,pipeline,pedido_seller: 1 linha por order_id+seller_id,1,OK ,verificacao
+07_validacao,pipeline,pedido_seller identificado como tal (linhas > pedidos únicos),1,OK 75845 linhas para 74781 pedidos únicos,verificacao
+07_validacao,pipeline,itens: mesma quantidade que os itens originais dos pedidos do recorte,1,OK ,verificacao
+07_validacao,pipeline,frete não multiplicado pelos joins (itens),1,OK 1712901.77,verificacao
+07_validacao,pipeline,preço não multiplicado pelos joins (itens),1,OK ,verificacao
+07_validacao,pipeline,frete pedido_seller == frete itens,1,OK ,verificacao
+07_validacao,pipeline,frete pedidos == frete itens,1,OK ,verificacao
+07_validacao,pipeline,somente status delivered,1,OK ,verificacao
+07_validacao,pipeline,ano_original confere com a data de compra original,1,OK ,verificacao
+07_validacao,pipeline,somente meses 1 a 8,1,OK ,verificacao
+07_validacao,pipeline,somente anos 2017 e 2018,1,OK ,verificacao
+07_validacao,pipeline,datas originais não alteradas,1,OK ,verificacao
+07_validacao,pipeline,rótulo de período coerente com o ano original,1,OK ,verificacao
+07_validacao,pipeline,pedidos 2017 vs referência da proposta,21998,referência 21998; diferença 0,verificacao
+07_validacao,pipeline,pedidos 2018 vs referência da proposta,52783,referência 52783; diferença 0,verificacao
+07_validacao,pipeline,avaliação escolhida é a mais recente,1,OK 391 pedidos com >1 avaliação,verificacao
+07_validacao,pipeline,notas no intervalo 1-5,1,OK ,verificacao
+07_validacao,pipeline,avaliacao_ruim == nota 1 ou 2,1,OK ,verificacao
+07_validacao,pipeline,pedidos sem avaliação não têm nota imputada,1,OK ,verificacao
+07_validacao,pipeline,KPI3 por pedido usa o menor shipping_limit_date,1,OK ,verificacao
+07_validacao,pipeline,fronteira: postagem == limite conta como no prazo,1,OK ,verificacao
+07_validacao,pipeline,não elegíveis ficam sem classificação,1,OK ,verificacao
+07_validacao,pipeline,pedido_seller usa o menor shipping_limit_date do seller no pedido,1,OK ,verificacao
+07_validacao,pipeline,mapa UF->região cobre as UFs presentes,1,OK 27 UFs,verificacao
+07_validacao,pipeline,mapa tem 27 UFs e 5 regiões,1,OK ,verificacao
+07_validacao,pipeline,distribuicao_notas.csv: pct_pedidos_avaliados entre 0 e 100,1,OK ,verificacao
+07_validacao,pipeline,kpi_categoria.csv: pedidos_avaliacao_ruim <= pedidos_com_avaliacao,1,OK ,verificacao
+07_validacao,pipeline,kpi_categoria.csv: pedidos_com_avaliacao <= pedidos_entregues,1,OK ,verificacao
+07_validacao,pipeline,kpi_categoria.csv: pedidos_postagem_no_prazo <= pedidos_postagem_elegiveis,1,OK ,verificacao
+07_validacao,pipeline,kpi_categoria.csv: pedidos_postagem_elegiveis <= pedidos_entregues,1,OK ,verificacao
+07_validacao,pipeline,kpi_categoria.csv: pedidos_entrega_atrasada <= pedidos_entrega_avaliavel,1,OK ,verificacao
+07_validacao,pipeline,kpi_categoria.csv: pct_sem_avaliacao entre 0 e 100,1,OK ,verificacao
+07_validacao,pipeline,kpi_categoria.csv: kpi1_pct_avaliacao_ruim entre 0 e 100,1,OK ,verificacao
+07_validacao,pipeline,kpi_categoria.csv: kpi3_pct_postagem_no_prazo entre 0 e 100,1,OK ,verificacao
+07_validacao,pipeline,kpi_categoria.csv: pct_entrega_atrasada entre 0 e 100,1,OK ,verificacao
+07_validacao,pipeline,kpi_categoria.csv: kpi2_pct_frete_sobre_produto >= 0,1,OK 0 grupos acima de 100% (razão legítima),verificacao
+07_validacao,pipeline,kpi_mensal.csv: pedidos_avaliacao_ruim <= pedidos_com_avaliacao,1,OK ,verificacao
+07_validacao,pipeline,kpi_mensal.csv: pedidos_com_avaliacao <= pedidos_entregues,1,OK ,verificacao
+07_validacao,pipeline,kpi_mensal.csv: pedidos_postagem_no_prazo <= pedidos_postagem_elegiveis,1,OK ,verificacao
+07_validacao,pipeline,kpi_mensal.csv: pedidos_postagem_elegiveis <= pedidos_entregues,1,OK ,verificacao
+07_validacao,pipeline,kpi_mensal.csv: pedidos_entrega_atrasada <= pedidos_entrega_avaliavel,1,OK ,verificacao
+07_validacao,pipeline,kpi_mensal.csv: pct_sem_avaliacao entre 0 e 100,1,OK ,verificacao
+07_validacao,pipeline,kpi_mensal.csv: kpi1_pct_avaliacao_ruim entre 0 e 100,1,OK ,verificacao
+07_validacao,pipeline,kpi_mensal.csv: kpi3_pct_postagem_no_prazo entre 0 e 100,1,OK ,verificacao
+07_validacao,pipeline,kpi_mensal.csv: pct_entrega_atrasada entre 0 e 100,1,OK ,verificacao
+07_validacao,pipeline,kpi_mensal.csv: kpi2_pct_frete_sobre_produto >= 0,1,OK 0 grupos acima de 100% (razão legítima),verificacao
+07_validacao,pipeline,kpi_regiao.csv: pedidos_avaliacao_ruim <= pedidos_com_avaliacao,1,OK ,verificacao
+07_validacao,pipeline,kpi_regiao.csv: pedidos_com_avaliacao <= pedidos_entregues,1,OK ,verificacao
+07_validacao,pipeline,kpi_regiao.csv: pedidos_postagem_no_prazo <= pedidos_postagem_elegiveis,1,OK ,verificacao
+07_validacao,pipeline,kpi_regiao.csv: pedidos_postagem_elegiveis <= pedidos_entregues,1,OK ,verificacao
+07_validacao,pipeline,kpi_regiao.csv: pedidos_entrega_atrasada <= pedidos_entrega_avaliavel,1,OK ,verificacao
+07_validacao,pipeline,kpi_regiao.csv: pct_sem_avaliacao entre 0 e 100,1,OK ,verificacao
+07_validacao,pipeline,kpi_regiao.csv: kpi1_pct_avaliacao_ruim entre 0 e 100,1,OK ,verificacao
+07_validacao,pipeline,kpi_regiao.csv: kpi3_pct_postagem_no_prazo entre 0 e 100,1,OK ,verificacao
+07_validacao,pipeline,kpi_regiao.csv: pct_entrega_atrasada entre 0 e 100,1,OK ,verificacao
+07_validacao,pipeline,kpi_regiao.csv: kpi2_pct_frete_sobre_produto >= 0,1,OK 0 grupos acima de 100% (razão legítima),verificacao
+07_validacao,pipeline,kpi_resumo_periodo.csv: pedidos_avaliacao_ruim <= pedidos_com_avaliacao,1,OK ,verificacao
+07_validacao,pipeline,kpi_resumo_periodo.csv: pedidos_com_avaliacao <= pedidos_entregues,1,OK ,verificacao
+07_validacao,pipeline,kpi_resumo_periodo.csv: pedidos_postagem_no_prazo <= pedidos_postagem_elegiveis,1,OK ,verificacao
+07_validacao,pipeline,kpi_resumo_periodo.csv: pedidos_postagem_elegiveis <= pedidos_entregues,1,OK ,verificacao
+07_validacao,pipeline,kpi_resumo_periodo.csv: pedidos_entrega_atrasada <= pedidos_entrega_avaliavel,1,OK ,verificacao
+07_validacao,pipeline,kpi_resumo_periodo.csv: pct_sem_avaliacao entre 0 e 100,1,OK ,verificacao
+07_validacao,pipeline,kpi_resumo_periodo.csv: kpi1_pct_avaliacao_ruim entre 0 e 100,1,OK ,verificacao
+07_validacao,pipeline,kpi_resumo_periodo.csv: kpi3_pct_postagem_no_prazo entre 0 e 100,1,OK ,verificacao
+07_validacao,pipeline,kpi_resumo_periodo.csv: pct_entrega_atrasada entre 0 e 100,1,OK ,verificacao
+07_validacao,pipeline,kpi_resumo_periodo.csv: kpi2_pct_frete_sobre_produto >= 0,1,OK 0 grupos acima de 100% (razão legítima),verificacao
+07_validacao,pipeline,kpi_seller.csv: pedido_seller_postagem_atrasada <= pedido_seller_elegiveis_postagem,1,OK ,verificacao
+07_validacao,pipeline,kpi_seller.csv: pedido_seller_avaliacao_ruim <= pedido_seller_com_avaliacao,1,OK ,verificacao
+07_validacao,pipeline,kpi_seller.csv: pedido_seller_entrega_atrasada <= pedido_seller_entrega_avaliavel,1,OK ,verificacao
+07_validacao,pipeline,kpi_seller.csv: pct_postagem_atrasada entre 0 e 100,1,OK ,verificacao
+07_validacao,pipeline,kpi_seller.csv: pct_postagem_no_prazo entre 0 e 100,1,OK ,verificacao
+07_validacao,pipeline,kpi_seller.csv: pct_avaliacao_ruim entre 0 e 100,1,OK ,verificacao
+07_validacao,pipeline,kpi_seller.csv: pct_entrega_atrasada entre 0 e 100,1,OK ,verificacao
+07_validacao,pipeline,kpi_seller.csv: pct_frete_sobre_produto >= 0,1,OK 91 grupos acima de 100% (razão legítima),verificacao
+07_validacao,pipeline,kpi_uf.csv: pedidos_avaliacao_ruim <= pedidos_com_avaliacao,1,OK ,verificacao
+07_validacao,pipeline,kpi_uf.csv: pedidos_com_avaliacao <= pedidos_entregues,1,OK ,verificacao
+07_validacao,pipeline,kpi_uf.csv: pedidos_postagem_no_prazo <= pedidos_postagem_elegiveis,1,OK ,verificacao
+07_validacao,pipeline,kpi_uf.csv: pedidos_postagem_elegiveis <= pedidos_entregues,1,OK ,verificacao
+07_validacao,pipeline,kpi_uf.csv: pedidos_entrega_atrasada <= pedidos_entrega_avaliavel,1,OK ,verificacao
+07_validacao,pipeline,kpi_uf.csv: pct_sem_avaliacao entre 0 e 100,1,OK ,verificacao
+07_validacao,pipeline,kpi_uf.csv: kpi1_pct_avaliacao_ruim entre 0 e 100,1,OK ,verificacao
+07_validacao,pipeline,kpi_uf.csv: kpi3_pct_postagem_no_prazo entre 0 e 100,1,OK ,verificacao
+07_validacao,pipeline,kpi_uf.csv: pct_entrega_atrasada entre 0 e 100,1,OK ,verificacao
+07_validacao,pipeline,kpi_uf.csv: kpi2_pct_frete_sobre_produto >= 0,1,OK 0 grupos acima de 100% (razão legítima),verificacao
+07_validacao,pipeline,kpi_uf_seller_postagem.csv: pedido_seller_atrasadas <= pedido_seller_elegiveis,1,OK ,verificacao
+07_validacao,pipeline,kpi_uf_seller_postagem.csv: pct_postagem_atrasada entre 0 e 100,1,OK ,verificacao
+07_validacao,pipeline,origem_atraso_regiao.csv: pct_postagem_atrasada entre 0 e 100,1,OK ,verificacao
+07_validacao,pipeline,origem_atraso_regiao.csv: pct_entrega_atrasada entre 0 e 100,1,OK ,verificacao
+07_validacao,pipeline,origem_atraso_regiao.csv: pct_entrega_atrasada_dado_postagem_no_prazo entre 0 e 100,1,OK ,verificacao
+07_validacao,pipeline,origem_atraso_regiao.csv: pct_entrega_atrasada_dado_postagem_atrasada entre 0 e 100,1,OK ,verificacao
+07_validacao,pipeline,ranking_semanal_sellers_atraso.csv: pedido_seller_postagem_atrasada <= pedido_seller_elegiveis_postagem,1,OK ,verificacao
+07_validacao,pipeline,ranking_semanal_sellers_atraso.csv: pct_postagem_atrasada entre 0 e 100,1,OK ,verificacao
+07_validacao,pipeline,relacao_atraso_avaliacao.csv: pedidos_avaliacao_ruim <= pedidos_com_avaliacao,1,OK ,verificacao
+07_validacao,pipeline,relacao_atraso_avaliacao.csv: pedidos_entrega_atrasada <= pedidos_entrega_avaliavel,1,OK ,verificacao
+07_validacao,pipeline,relacao_atraso_avaliacao.csv: pct_avaliacao_ruim entre 0 e 100,1,OK ,verificacao
+07_validacao,pipeline,relacao_atraso_avaliacao.csv: pct_entrega_atrasada entre 0 e 100,1,OK ,verificacao
+07_validacao,pipeline,testes_associacao.csv: numerador <= denominador,1,OK ,verificacao
+07_validacao,pipeline,testes_associacao.csv: pct entre 0 e 100,1,OK ,verificacao
+07_validacao,pipeline,top_50_sellers_atraso.csv: pedido_seller_postagem_atrasada <= pedido_seller_elegiveis_postagem,1,OK ,verificacao
+07_validacao,pipeline,top_50_sellers_atraso.csv: pedido_seller_avaliacao_ruim <= pedido_seller_com_avaliacao,1,OK ,verificacao
+07_validacao,pipeline,top_50_sellers_atraso.csv: pedido_seller_entrega_atrasada <= pedido_seller_entrega_avaliavel,1,OK ,verificacao
+07_validacao,pipeline,top_50_sellers_atraso.csv: pct_postagem_atrasada entre 0 e 100,1,OK ,verificacao
+07_validacao,pipeline,top_50_sellers_atraso.csv: pct_postagem_no_prazo entre 0 e 100,1,OK ,verificacao
+07_validacao,pipeline,top_50_sellers_atraso.csv: pct_avaliacao_ruim entre 0 e 100,1,OK ,verificacao
+07_validacao,pipeline,top_50_sellers_atraso.csv: pct_entrega_atrasada entre 0 e 100,1,OK ,verificacao
+07_validacao,pipeline,top_50_sellers_atraso.csv: pct_frete_sobre_produto >= 0,1,OK 0 grupos acima de 100% (razão legítima),verificacao
+07_validacao,pipeline,top_50_sellers_atraso.csv: pct_acumulado_atrasos entre 0 e 100,1,OK ,verificacao
+07_validacao,pipeline,KPI1 do resumo recalculado a partir da tabela de pedidos,1,OK ,verificacao
+07_validacao,pipeline,KPI2 do resumo recalculado a partir dos itens originais,1,OK ,verificacao
+07_validacao,pipeline,soma mensal de pedidos == total do período,1,OK ,verificacao
+07_validacao,pipeline,soma por região de pedidos == total do período,1,OK ,verificacao

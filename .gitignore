@@ -1,0 +1,24 @@
+# Material interno de trabalho (não faz parte da entrega)
+PROMPT_CLAUDE*.md
+*.prompt.md
+
+# Base original da Olist: baixar do Kaggle (ver README)
+olist_*_dataset.csv
+product_category_name_translation.csv
+
+# Tabelas intermediárias regeneráveis por run_pipeline.py
+data_processed/
+
+# Python / Jupyter
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+
+# Power BI: caches e configurações locais
+**/.pbi/localSettings.json
+**/.pbi/cache.abf
+
+# Sistema
+Thumbs.db
+desktop.ini
+.DS_Store

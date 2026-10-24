@@ -1,0 +1,25 @@
+periodo_comparativo,situacao_postagem,situacao_entrega,pedidos_com_avaliacao,pedidos_avaliacao_ruim,pct_avaliacao_ruim,pedidos_entrega_avaliavel,pedidos_entrega_atrasada,pct_entrega_atrasada,granularidade
+2024 (proxy jan-ago/2017),postagem atrasada,entrega atrasada,222,130,58.55855855855856,,,,periodo_situacao_postagem_situacao_entrega
+2024 (proxy jan-ago/2017),postagem atrasada,entrega no prazo,1643,226,13.755325623858795,,,,periodo_situacao_postagem_situacao_entrega
+2024 (proxy jan-ago/2017),postagem atrasada,todos,1865,356,19.08847184986595,1894.0,233.0,12.302006335797254,periodo_situacao_postagem_situacao_entrega
+2024 (proxy jan-ago/2017),postagem no prazo,entrega atrasada,518,297,57.33590733590733,,,,periodo_situacao_postagem_situacao_entrega
+2024 (proxy jan-ago/2017),postagem no prazo,entrega no prazo,19453,1659,8.52824757106873,,,,periodo_situacao_postagem_situacao_entrega
+2024 (proxy jan-ago/2017),postagem no prazo,todos,19971,1956,9.794201592308847,20103.0,536.0,2.666268716112023,periodo_situacao_postagem_situacao_entrega
+2024 (proxy jan-ago/2017),sem dado,sem dado,1,0,0.0,,,,periodo_situacao_postagem_situacao_entrega
+2024 (proxy jan-ago/2017),sem dado,todos,1,0,0.0,,,,periodo_situacao_postagem_situacao_entrega
+2024 (proxy jan-ago/2017),todos,entrega atrasada,740,427,57.7027027027027,,,,periodo_situacao_postagem_situacao_entrega
+2024 (proxy jan-ago/2017),todos,entrega no prazo,21096,1885,8.935343193022375,,,,periodo_situacao_postagem_situacao_entrega
+2024 (proxy jan-ago/2017),todos,sem dado,1,0,0.0,,,,periodo_situacao_postagem_situacao_entrega
+2024 (proxy jan-ago/2017),todos,todos,21837,2312,10.587534917800063,,,,periodo_situacao_postagem_situacao_entrega
+2025 (proxy jan-ago/2018),postagem atrasada,entrega atrasada,989,627,63.397371081900914,,,,periodo_situacao_postagem_situacao_entrega
+2025 (proxy jan-ago/2018),postagem atrasada,entrega no prazo,3480,471,13.534482758620689,,,,periodo_situacao_postagem_situacao_entrega
+2025 (proxy jan-ago/2018),postagem atrasada,sem dado,1,0,0.0,,,,periodo_situacao_postagem_situacao_entrega
+2025 (proxy jan-ago/2018),postagem atrasada,todos,4470,1098,24.563758389261743,4511.0,1010.0,22.38971403236533,periodo_situacao_postagem_situacao_entrega
+2025 (proxy jan-ago/2018),postagem no prazo,entrega atrasada,3005,1887,62.79534109816972,,,,periodo_situacao_postagem_situacao_entrega
+2025 (proxy jan-ago/2018),postagem no prazo,entrega no prazo,44988,4030,8.95794434071308,,,,periodo_situacao_postagem_situacao_entrega
+2025 (proxy jan-ago/2018),postagem no prazo,sem dado,5,1,20.0,,,,periodo_situacao_postagem_situacao_entrega
+2025 (proxy jan-ago/2018),postagem no prazo,todos,47998,5918,12.329680403350139,48266.0,3068.0,6.35644138731198,periodo_situacao_postagem_situacao_entrega
+2025 (proxy jan-ago/2018),todos,entrega atrasada,3994,2514,62.9444166249374,,,,periodo_situacao_postagem_situacao_entrega
+2025 (proxy jan-ago/2018),todos,entrega no prazo,48468,4501,9.286539572501445,,,,periodo_situacao_postagem_situacao_entrega
+2025 (proxy jan-ago/2018),todos,sem dado,6,1,16.666666666666664,,,,periodo_situacao_postagem_situacao_entrega
+2025 (proxy jan-ago/2018),todos,todos,52468,7016,13.371960051841123,,,,periodo_situacao_postagem_situacao_entrega

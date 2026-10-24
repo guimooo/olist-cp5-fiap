@@ -1,0 +1,104 @@
+/// Fato: 1 linha por pedido entregue (jan–ago 2017/2018). Base do KPI01 e do KPI03.
+table Pedidos
+	lineageTag: 0278fda2-a2d4-5281-acbc-c2cb3e09bb98
+
+	column 'ID Pedido'
+		dataType: string
+		isHidden
+		lineageTag: ece108aa-b3fc-5c9f-96fc-1d414363c855
+		summarizeBy: none
+		sourceColumn: ID Pedido
+
+	column 'Data Compra'
+		dataType: dateTime
+		formatString: dd/mm/yyyy
+		isHidden
+		lineageTag: 2ea21825-b082-5727-bc62-86faf747f2e6
+		summarizeBy: none
+		sourceColumn: Data Compra
+
+	column 'UF Cliente'
+		dataType: string
+		isHidden
+		lineageTag: ed2be0ad-ef19-5b45-b5e7-f4f4ab218eef
+		summarizeBy: none
+		sourceColumn: UF Cliente
+
+	/// Nota da avaliação mais recente do pedido (1–5); vazio = sem avaliação.
+	column 'Nota Avaliação'
+		dataType: int64
+		formatString: 0
+		lineageTag: 09860226-4877-5afb-ae02-bda4566e8360
+		summarizeBy: none
+		sourceColumn: Nota Avaliação
+
+	column 'Postagem Elegível'
+		dataType: boolean
+		lineageTag: 7bb37321-85b1-50f4-9553-121b318c3297
+		summarizeBy: none
+		sourceColumn: Postagem Elegível
+
+	column 'Postagem no Prazo'
+		dataType: boolean
+		lineageTag: 7ed79060-c74b-5633-827d-57d0dd934ad1
+		summarizeBy: none
+		sourceColumn: Postagem no Prazo
+
+	column 'Entrega Atrasada'
+		dataType: boolean
+		lineageTag: 0a17ce59-941d-5c14-a478-f30a1008bc98
+		summarizeBy: none
+		sourceColumn: Entrega Atrasada
+
+	column 'Situação Postagem'
+		dataType: string
+		lineageTag: e728d875-d05b-53cc-886a-60eb35c0666b
+		summarizeBy: none
+		sourceColumn: Situação Postagem
+
+	column 'Situação Entrega'
+		dataType: string
+		lineageTag: 4d1edbfc-5571-5862-aad6-863fff4ea2da
+		summarizeBy: none
+		sourceColumn: Situação Entrega
+
+	column 'Dias Postagem até Entrega'
+		dataType: double
+		formatString: 0.0
+		isHidden
+		lineageTag: fab93906-8221-5539-9c67-6d3ad4e3fbae
+		summarizeBy: none
+		sourceColumn: Dias Postagem até Entrega
+
+	column 'Qtd Sellers no Pedido'
+		dataType: int64
+		formatString: 0
+		isHidden
+		lineageTag: f4d5583c-312f-5d54-b1e5-e72756cc44ca
+		summarizeBy: none
+		sourceColumn: Qtd Sellers no Pedido
+
+	partition Pedidos = m
+		mode: import
+		source =
+				let
+				    Fonte = Csv.Document(File.Contents(PastaDados & "pedidos.csv"), [Delimiter = ",", Encoding = 65001, QuoteStyle = QuoteStyle.Csv]),
+				    Cabecalhos = Table.PromoteHeaders(Fonte, [PromoteAllScalars = true]),
+				    Tipos = Table.TransformColumns(Cabecalhos, {
+				        {"id_pedido", each if _ = "" then null else _, type text},
+				        {"data_compra", each Date.FromText(_, [Format = "yyyy-MM-dd", Culture = "en-US"]), type date},
+				        {"uf_cliente", each if _ = "" then null else _, type text},
+				        {"nota_avaliacao", each if _ = "" then null else Int64.From(_), Int64.Type},
+				        {"postagem_elegivel", each if _ = "" then null else _ = "true", type logical},
+				        {"postagem_no_prazo", each if _ = "" then null else _ = "true", type logical},
+				        {"entrega_atrasada", each if _ = "" then null else _ = "true", type logical},
+				        {"situacao_postagem", each if _ = "" then null else _, type text},
+				        {"situacao_entrega", each if _ = "" then null else _, type text},
+				        {"dias_postagem_entrega", each if _ = "" then null else Number.FromText(_, "en-US"), type number},
+				        {"qtd_sellers", each if _ = "" then null else Int64.From(_), Int64.Type}
+				    }),
+				    Nomes = Table.RenameColumns(Tipos, {{"id_pedido", "ID Pedido"}, {"data_compra", "Data Compra"}, {"uf_cliente", "UF Cliente"}, {"nota_avaliacao", "Nota Avaliação"}, {"postagem_elegivel", "Postagem Elegível"}, {"postagem_no_prazo", "Postagem no Prazo"}, {"entrega_atrasada", "Entrega Atrasada"}, {"situacao_postagem", "Situação Postagem"}, {"situacao_entrega", "Situação Entrega"}, {"dias_postagem_entrega", "Dias Postagem até Entrega"}, {"qtd_sellers", "Qtd Sellers no Pedido"}})
+				in
+				    Nomes
+
+	annotation PBI_ResultType = Table

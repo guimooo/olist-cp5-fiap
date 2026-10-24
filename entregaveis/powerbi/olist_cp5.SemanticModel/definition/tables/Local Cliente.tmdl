@@ -1,0 +1,41 @@
+/// Dimensão UF/região do cliente (27 UFs, mapa explícito da E1).
+table 'Local Cliente'
+	lineageTag: 7a565579-273a-5ac7-ac6d-813a2a99cdef
+
+	column UF
+		dataType: string
+		lineageTag: ed215f48-b58c-54fd-82da-7256dfa8367b
+		summarizeBy: none
+		sourceColumn: UF
+
+	column 'Região'
+		dataType: string
+		lineageTag: c9d0a141-4f35-5a64-8fbf-2c22f3bc1946
+		summarizeBy: none
+		sourceColumn: Região
+		sortByColumn: 'Ordem Região'
+
+	column 'Ordem Região'
+		dataType: int64
+		formatString: 0
+		isHidden
+		lineageTag: 7a20d9f3-9d5e-5ca9-bc13-b87dae984da6
+		summarizeBy: none
+		sourceColumn: Ordem Região
+
+	partition 'Local Cliente' = m
+		mode: import
+		source =
+				let
+				    Fonte = Csv.Document(File.Contents(PastaDados & "uf.csv"), [Delimiter = ",", Encoding = 65001, QuoteStyle = QuoteStyle.Csv]),
+				    Cabecalhos = Table.PromoteHeaders(Fonte, [PromoteAllScalars = true]),
+				    Tipos = Table.TransformColumns(Cabecalhos, {
+				        {"uf", each if _ = "" then null else _, type text},
+				        {"regiao", each if _ = "" then null else _, type text},
+				        {"ordem_regiao", each if _ = "" then null else Int64.From(_), Int64.Type}
+				    }),
+				    Nomes = Table.RenameColumns(Tipos, {{"uf", "UF"}, {"regiao", "Região"}, {"ordem_regiao", "Ordem Região"}})
+				in
+				    Nomes
+
+	annotation PBI_ResultType = Table

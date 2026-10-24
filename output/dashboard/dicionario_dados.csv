@@ -1,0 +1,225 @@
+arquivo,linhas_arquivo,granularidade_arquivo,coluna,tipo,descricao
+distribuicao_notas.csv,10,,periodo_comparativo,object,Rótulo da proxy acadêmica: 2024 = jan-ago/2017; 2025 = jan-ago/2018. Não são dados reais de 2024/2025.
+distribuicao_notas.csv,10,,review_score,float64,Nota da avaliação (1-5).
+distribuicao_notas.csv,10,,pedidos,int64,Pedidos.
+distribuicao_notas.csv,10,,pct_pedidos_avaliados,float64,Percentual (0-100): pedidos avaliados.
+kpi_categoria.csv,144,periodo_categoria (pedido contado em cada categoria que contém),ano_original,int64,Ano real da compra no dataset (2017 ou 2018). Datas originais não são alteradas.
+kpi_categoria.csv,144,periodo_categoria (pedido contado em cada categoria que contém),periodo_comparativo,object,Rótulo da proxy acadêmica: 2024 = jan-ago/2017; 2025 = jan-ago/2018. Não são dados reais de 2024/2025.
+kpi_categoria.csv,144,periodo_categoria (pedido contado em cada categoria que contém),categoria_en,object,Categoria do produto em inglês (tradução oficial; nome original se sem tradução; 'sem_categoria' se ausente).
+kpi_categoria.csv,144,periodo_categoria (pedido contado em cada categoria que contém),pedidos_entregues,int64,Pedidos únicos entregues (status delivered) no grupo.
+kpi_categoria.csv,144,periodo_categoria (pedido contado em cada categoria que contém),pedidos_com_avaliacao,int64,Denominador do KPI1: pedidos com avaliação válida (mais recente por pedido).
+kpi_categoria.csv,144,periodo_categoria (pedido contado em cada categoria que contém),pedidos_avaliacao_ruim,int64,Numerador do KPI1: pedidos cuja avaliação mais recente tem nota 1 ou 2.
+kpi_categoria.csv,144,periodo_categoria (pedido contado em cada categoria que contém),pedidos_postagem_elegiveis,int64,Denominador do KPI3: pedidos com data de postagem e prazo limite válidos.
+kpi_categoria.csv,144,periodo_categoria (pedido contado em cada categoria que contém),pedidos_postagem_no_prazo,int64,Numerador do KPI3: pedidos postados até o menor shipping_limit_date dos itens (<= limite).
+kpi_categoria.csv,144,periodo_categoria (pedido contado em cada categoria que contém),pedidos_entrega_avaliavel,int64,Pedidos com data de entrega real e estimada válidas.
+kpi_categoria.csv,144,periodo_categoria (pedido contado em cada categoria que contém),pedidos_entrega_atrasada,int64,Pedidos entregues ao cliente depois do dia estimado.
+kpi_categoria.csv,144,periodo_categoria (pedido contado em cada categoria que contém),pedidos_sem_avaliacao,int64,Pedidos entregues sem avaliação (fora do denominador do KPI1).
+kpi_categoria.csv,144,periodo_categoria (pedido contado em cada categoria que contém),pct_sem_avaliacao,float64,Pedidos sem avaliação / pedidos entregues x 100.
+kpi_categoria.csv,144,periodo_categoria (pedido contado em cada categoria que contém),kpi1_pct_avaliacao_ruim,float64,KPI1: pedidos com nota 1-2 / pedidos com avaliação x 100.
+kpi_categoria.csv,144,periodo_categoria (pedido contado em cada categoria que contém),kpi3_pct_postagem_no_prazo,float64,KPI3: pedidos postados no prazo / pedidos elegíveis x 100.
+kpi_categoria.csv,144,periodo_categoria (pedido contado em cada categoria que contém),pct_entrega_atrasada,float64,Entrega atrasada / entregas avaliáveis x 100.
+kpi_categoria.csv,144,periodo_categoria (pedido contado em cada categoria que contém),itens,int64,Quantidade de itens (linhas de order_items).
+kpi_categoria.csv,144,periodo_categoria (pedido contado em cada categoria que contém),soma_frete,float64,Numerador do KPI2: soma de freight_value dos itens (R$).
+kpi_categoria.csv,144,periodo_categoria (pedido contado em cada categoria que contém),soma_preco_produtos,float64,Denominador do KPI2: soma de price dos itens (R$).
+kpi_categoria.csv,144,periodo_categoria (pedido contado em cada categoria que contém),kpi2_pct_frete_sobre_produto,float64,KPI2: soma do frete dos itens / soma do preço dos itens x 100.
+kpi_categoria.csv,144,periodo_categoria (pedido contado em cada categoria que contém),amostra_pequena,bool,True quando o denominador principal do grupo é menor que 30; interpretar com cautela.
+kpi_categoria.csv,144,periodo_categoria (pedido contado em cada categoria que contém),granularidade,object,Unidade de análise de cada linha do arquivo.
+kpi_mensal.csv,16,periodo_mes,ano_original,int64,Ano real da compra no dataset (2017 ou 2018). Datas originais não são alteradas.
+kpi_mensal.csv,16,periodo_mes,periodo_comparativo,object,Rótulo da proxy acadêmica: 2024 = jan-ago/2017; 2025 = jan-ago/2018. Não são dados reais de 2024/2025.
+kpi_mensal.csv,16,periodo_mes,mes,int64,Mês da compra (1-8).
+kpi_mensal.csv,16,periodo_mes,ano_mes_original,object,Ano-mês original da compra (AAAA-MM).
+kpi_mensal.csv,16,periodo_mes,pedidos_entregues,int64,Pedidos únicos entregues (status delivered) no grupo.
+kpi_mensal.csv,16,periodo_mes,pedidos_com_avaliacao,int64,Denominador do KPI1: pedidos com avaliação válida (mais recente por pedido).
+kpi_mensal.csv,16,periodo_mes,pedidos_avaliacao_ruim,int64,Numerador do KPI1: pedidos cuja avaliação mais recente tem nota 1 ou 2.
+kpi_mensal.csv,16,periodo_mes,pedidos_postagem_elegiveis,int64,Denominador do KPI3: pedidos com data de postagem e prazo limite válidos.
+kpi_mensal.csv,16,periodo_mes,pedidos_postagem_no_prazo,int64,Numerador do KPI3: pedidos postados até o menor shipping_limit_date dos itens (<= limite).
+kpi_mensal.csv,16,periodo_mes,pedidos_entrega_avaliavel,int64,Pedidos com data de entrega real e estimada válidas.
+kpi_mensal.csv,16,periodo_mes,pedidos_entrega_atrasada,int64,Pedidos entregues ao cliente depois do dia estimado.
+kpi_mensal.csv,16,periodo_mes,pedidos_sem_avaliacao,int64,Pedidos entregues sem avaliação (fora do denominador do KPI1).
+kpi_mensal.csv,16,periodo_mes,pct_sem_avaliacao,float64,Pedidos sem avaliação / pedidos entregues x 100.
+kpi_mensal.csv,16,periodo_mes,kpi1_pct_avaliacao_ruim,float64,KPI1: pedidos com nota 1-2 / pedidos com avaliação x 100.
+kpi_mensal.csv,16,periodo_mes,kpi3_pct_postagem_no_prazo,float64,KPI3: pedidos postados no prazo / pedidos elegíveis x 100.
+kpi_mensal.csv,16,periodo_mes,pct_entrega_atrasada,float64,Entrega atrasada / entregas avaliáveis x 100.
+kpi_mensal.csv,16,periodo_mes,itens,int64,Quantidade de itens (linhas de order_items).
+kpi_mensal.csv,16,periodo_mes,soma_frete,float64,Numerador do KPI2: soma de freight_value dos itens (R$).
+kpi_mensal.csv,16,periodo_mes,soma_preco_produtos,float64,Denominador do KPI2: soma de price dos itens (R$).
+kpi_mensal.csv,16,periodo_mes,kpi2_pct_frete_sobre_produto,float64,KPI2: soma do frete dos itens / soma do preço dos itens x 100.
+kpi_mensal.csv,16,periodo_mes,granularidade,object,Unidade de análise de cada linha do arquivo.
+kpi_regiao.csv,10,periodo_regiao_cliente,ano_original,int64,Ano real da compra no dataset (2017 ou 2018). Datas originais não são alteradas.
+kpi_regiao.csv,10,periodo_regiao_cliente,periodo_comparativo,object,Rótulo da proxy acadêmica: 2024 = jan-ago/2017; 2025 = jan-ago/2018. Não são dados reais de 2024/2025.
+kpi_regiao.csv,10,periodo_regiao_cliente,regiao_cliente,object,Região brasileira derivada da UF do cliente (mapa explícito de 27 UFs).
+kpi_regiao.csv,10,periodo_regiao_cliente,pedidos_entregues,int64,Pedidos únicos entregues (status delivered) no grupo.
+kpi_regiao.csv,10,periodo_regiao_cliente,pedidos_com_avaliacao,int64,Denominador do KPI1: pedidos com avaliação válida (mais recente por pedido).
+kpi_regiao.csv,10,periodo_regiao_cliente,pedidos_avaliacao_ruim,int64,Numerador do KPI1: pedidos cuja avaliação mais recente tem nota 1 ou 2.
+kpi_regiao.csv,10,periodo_regiao_cliente,pedidos_postagem_elegiveis,int64,Denominador do KPI3: pedidos com data de postagem e prazo limite válidos.
+kpi_regiao.csv,10,periodo_regiao_cliente,pedidos_postagem_no_prazo,int64,Numerador do KPI3: pedidos postados até o menor shipping_limit_date dos itens (<= limite).
+kpi_regiao.csv,10,periodo_regiao_cliente,pedidos_entrega_avaliavel,int64,Pedidos com data de entrega real e estimada válidas.
+kpi_regiao.csv,10,periodo_regiao_cliente,pedidos_entrega_atrasada,int64,Pedidos entregues ao cliente depois do dia estimado.
+kpi_regiao.csv,10,periodo_regiao_cliente,pedidos_sem_avaliacao,int64,Pedidos entregues sem avaliação (fora do denominador do KPI1).
+kpi_regiao.csv,10,periodo_regiao_cliente,pct_sem_avaliacao,float64,Pedidos sem avaliação / pedidos entregues x 100.
+kpi_regiao.csv,10,periodo_regiao_cliente,kpi1_pct_avaliacao_ruim,float64,KPI1: pedidos com nota 1-2 / pedidos com avaliação x 100.
+kpi_regiao.csv,10,periodo_regiao_cliente,kpi3_pct_postagem_no_prazo,float64,KPI3: pedidos postados no prazo / pedidos elegíveis x 100.
+kpi_regiao.csv,10,periodo_regiao_cliente,pct_entrega_atrasada,float64,Entrega atrasada / entregas avaliáveis x 100.
+kpi_regiao.csv,10,periodo_regiao_cliente,itens,int64,Quantidade de itens (linhas de order_items).
+kpi_regiao.csv,10,periodo_regiao_cliente,soma_frete,float64,Numerador do KPI2: soma de freight_value dos itens (R$).
+kpi_regiao.csv,10,periodo_regiao_cliente,soma_preco_produtos,float64,Denominador do KPI2: soma de price dos itens (R$).
+kpi_regiao.csv,10,periodo_regiao_cliente,kpi2_pct_frete_sobre_produto,float64,KPI2: soma do frete dos itens / soma do preço dos itens x 100.
+kpi_regiao.csv,10,periodo_regiao_cliente,amostra_pequena,bool,True quando o denominador principal do grupo é menor que 30; interpretar com cautela.
+kpi_regiao.csv,10,periodo_regiao_cliente,kpi2_referencia_proposta_2025,float64,Kpi2 referencia proposta 2025.
+kpi_regiao.csv,10,periodo_regiao_cliente,granularidade,object,Unidade de análise de cada linha do arquivo.
+kpi_resumo_periodo.csv,2,periodo,ano_original,int64,Ano real da compra no dataset (2017 ou 2018). Datas originais não são alteradas.
+kpi_resumo_periodo.csv,2,periodo,periodo_comparativo,object,Rótulo da proxy acadêmica: 2024 = jan-ago/2017; 2025 = jan-ago/2018. Não são dados reais de 2024/2025.
+kpi_resumo_periodo.csv,2,periodo,pedidos_entregues,int64,Pedidos únicos entregues (status delivered) no grupo.
+kpi_resumo_periodo.csv,2,periodo,pedidos_com_avaliacao,int64,Denominador do KPI1: pedidos com avaliação válida (mais recente por pedido).
+kpi_resumo_periodo.csv,2,periodo,pedidos_avaliacao_ruim,int64,Numerador do KPI1: pedidos cuja avaliação mais recente tem nota 1 ou 2.
+kpi_resumo_periodo.csv,2,periodo,pedidos_postagem_elegiveis,int64,Denominador do KPI3: pedidos com data de postagem e prazo limite válidos.
+kpi_resumo_periodo.csv,2,periodo,pedidos_postagem_no_prazo,int64,Numerador do KPI3: pedidos postados até o menor shipping_limit_date dos itens (<= limite).
+kpi_resumo_periodo.csv,2,periodo,pedidos_entrega_avaliavel,int64,Pedidos com data de entrega real e estimada válidas.
+kpi_resumo_periodo.csv,2,periodo,pedidos_entrega_atrasada,int64,Pedidos entregues ao cliente depois do dia estimado.
+kpi_resumo_periodo.csv,2,periodo,pedidos_sem_avaliacao,int64,Pedidos entregues sem avaliação (fora do denominador do KPI1).
+kpi_resumo_periodo.csv,2,periodo,pct_sem_avaliacao,float64,Pedidos sem avaliação / pedidos entregues x 100.
+kpi_resumo_periodo.csv,2,periodo,kpi1_pct_avaliacao_ruim,float64,KPI1: pedidos com nota 1-2 / pedidos com avaliação x 100.
+kpi_resumo_periodo.csv,2,periodo,kpi3_pct_postagem_no_prazo,float64,KPI3: pedidos postados no prazo / pedidos elegíveis x 100.
+kpi_resumo_periodo.csv,2,periodo,pct_entrega_atrasada,float64,Entrega atrasada / entregas avaliáveis x 100.
+kpi_resumo_periodo.csv,2,periodo,itens,int64,Quantidade de itens (linhas de order_items).
+kpi_resumo_periodo.csv,2,periodo,soma_frete,float64,Numerador do KPI2: soma de freight_value dos itens (R$).
+kpi_resumo_periodo.csv,2,periodo,soma_preco_produtos,float64,Denominador do KPI2: soma de price dos itens (R$).
+kpi_resumo_periodo.csv,2,periodo,kpi2_pct_frete_sobre_produto,float64,KPI2: soma do frete dos itens / soma do preço dos itens x 100.
+kpi_resumo_periodo.csv,2,periodo,kpi1_pct_avaliacao_ruim_referencia_proposta,float64,Valor de referência informado na proposta (não calculado).
+kpi_resumo_periodo.csv,2,periodo,kpi1_pct_avaliacao_ruim_diferenca_pp_vs_referencia,float64,"Calculado (1 casa) menos referência da proposta, em p.p."
+kpi_resumo_periodo.csv,2,periodo,kpi1_pct_avaliacao_ruim_meta_2026,float64,Meta da proposta (não calculada).
+kpi_resumo_periodo.csv,2,periodo,kpi1_pct_avaliacao_ruim_meta_2027,float64,Meta da proposta (não calculada).
+kpi_resumo_periodo.csv,2,periodo,kpi2_pct_frete_sobre_produto_referencia_proposta,float64,Valor de referência informado na proposta (não calculado).
+kpi_resumo_periodo.csv,2,periodo,kpi2_pct_frete_sobre_produto_diferenca_pp_vs_referencia,float64,"Calculado (1 casa) menos referência da proposta, em p.p."
+kpi_resumo_periodo.csv,2,periodo,kpi2_pct_frete_sobre_produto_meta_2026,float64,Meta da proposta (não calculada).
+kpi_resumo_periodo.csv,2,periodo,kpi2_pct_frete_sobre_produto_meta_2027,float64,Meta da proposta (não calculada).
+kpi_resumo_periodo.csv,2,periodo,kpi3_pct_postagem_no_prazo_referencia_proposta,float64,Valor de referência informado na proposta (não calculado).
+kpi_resumo_periodo.csv,2,periodo,kpi3_pct_postagem_no_prazo_diferenca_pp_vs_referencia,float64,"Calculado (1 casa) menos referência da proposta, em p.p."
+kpi_resumo_periodo.csv,2,periodo,kpi3_pct_postagem_no_prazo_meta_2026,float64,Meta da proposta (não calculada).
+kpi_resumo_periodo.csv,2,periodo,kpi3_pct_postagem_no_prazo_meta_2027,float64,Meta da proposta (não calculada).
+kpi_resumo_periodo.csv,2,periodo,pedidos_referencia_proposta,int64,"Total de pedidos informado na proposta (check, não calculado)."
+kpi_resumo_periodo.csv,2,periodo,granularidade,object,Unidade de análise de cada linha do arquivo.
+kpi_seller.csv,6293,seller_periodo; seller_consolidado,seller_id,object,Identificador do seller.
+kpi_seller.csv,6293,seller_periodo; seller_consolidado,ano_original,float64,Ano real da compra no dataset (2017 ou 2018). Datas originais não são alteradas.
+kpi_seller.csv,6293,seller_periodo; seller_consolidado,periodo_comparativo,object,Rótulo da proxy acadêmica: 2024 = jan-ago/2017; 2025 = jan-ago/2018. Não são dados reais de 2024/2025.
+kpi_seller.csv,6293,seller_periodo; seller_consolidado,seller_state,object,UF do seller.
+kpi_seller.csv,6293,seller_periodo; seller_consolidado,seller_regiao,object,Região derivada da UF do seller.
+kpi_seller.csv,6293,seller_periodo; seller_consolidado,pedido_seller_total,int64,Contagem na granularidade pedido-seller (não equivale a pedidos únicos): total.
+kpi_seller.csv,6293,seller_periodo; seller_consolidado,pedido_seller_elegiveis_postagem,int64,Contagem na granularidade pedido-seller (não equivale a pedidos únicos): elegiveis postagem.
+kpi_seller.csv,6293,seller_periodo; seller_consolidado,pedido_seller_postagem_atrasada,int64,Contagem na granularidade pedido-seller (não equivale a pedidos únicos): postagem atrasada.
+kpi_seller.csv,6293,seller_periodo; seller_consolidado,pedido_seller_com_avaliacao,int64,Contagem na granularidade pedido-seller (não equivale a pedidos únicos): com avaliacao.
+kpi_seller.csv,6293,seller_periodo; seller_consolidado,pedido_seller_avaliacao_ruim,int64,Contagem na granularidade pedido-seller (não equivale a pedidos únicos): avaliacao ruim.
+kpi_seller.csv,6293,seller_periodo; seller_consolidado,pedido_seller_entrega_avaliavel,int64,Contagem na granularidade pedido-seller (não equivale a pedidos únicos): entrega avaliavel.
+kpi_seller.csv,6293,seller_periodo; seller_consolidado,pedido_seller_entrega_atrasada,int64,Contagem na granularidade pedido-seller (não equivale a pedidos únicos): entrega atrasada.
+kpi_seller.csv,6293,seller_periodo; seller_consolidado,itens,int64,Quantidade de itens (linhas de order_items).
+kpi_seller.csv,6293,seller_periodo; seller_consolidado,soma_preco,float64,Soma de price dos itens (R$).
+kpi_seller.csv,6293,seller_periodo; seller_consolidado,soma_frete,float64,Numerador do KPI2: soma de freight_value dos itens (R$).
+kpi_seller.csv,6293,seller_periodo; seller_consolidado,pedido_seller_postagem_no_prazo,int64,Contagem na granularidade pedido-seller (não equivale a pedidos únicos): postagem no prazo.
+kpi_seller.csv,6293,seller_periodo; seller_consolidado,pct_postagem_atrasada,float64,Percentual (0-100): postagem atrasada.
+kpi_seller.csv,6293,seller_periodo; seller_consolidado,pct_postagem_no_prazo,float64,Percentual (0-100): postagem no prazo.
+kpi_seller.csv,6293,seller_periodo; seller_consolidado,pct_avaliacao_ruim,float64,Percentual (0-100): avaliacao ruim.
+kpi_seller.csv,6293,seller_periodo; seller_consolidado,pct_entrega_atrasada,float64,Entrega atrasada / entregas avaliáveis x 100.
+kpi_seller.csv,6293,seller_periodo; seller_consolidado,pct_frete_sobre_produto,float64,Percentual (0-100): frete sobre produto.
+kpi_seller.csv,6293,seller_periodo; seller_consolidado,amostra_pequena,bool,True quando o denominador principal do grupo é menor que 30; interpretar com cautela.
+kpi_seller.csv,6293,seller_periodo; seller_consolidado,granularidade,object,Unidade de análise de cada linha do arquivo.
+kpi_uf.csv,54,periodo_uf_cliente,ano_original,int64,Ano real da compra no dataset (2017 ou 2018). Datas originais não são alteradas.
+kpi_uf.csv,54,periodo_uf_cliente,periodo_comparativo,object,Rótulo da proxy acadêmica: 2024 = jan-ago/2017; 2025 = jan-ago/2018. Não são dados reais de 2024/2025.
+kpi_uf.csv,54,periodo_uf_cliente,customer_state,object,UF do cliente.
+kpi_uf.csv,54,periodo_uf_cliente,pedidos_entregues,int64,Pedidos únicos entregues (status delivered) no grupo.
+kpi_uf.csv,54,periodo_uf_cliente,pedidos_com_avaliacao,int64,Denominador do KPI1: pedidos com avaliação válida (mais recente por pedido).
+kpi_uf.csv,54,periodo_uf_cliente,pedidos_avaliacao_ruim,int64,Numerador do KPI1: pedidos cuja avaliação mais recente tem nota 1 ou 2.
+kpi_uf.csv,54,periodo_uf_cliente,pedidos_postagem_elegiveis,int64,Denominador do KPI3: pedidos com data de postagem e prazo limite válidos.
+kpi_uf.csv,54,periodo_uf_cliente,pedidos_postagem_no_prazo,int64,Numerador do KPI3: pedidos postados até o menor shipping_limit_date dos itens (<= limite).
+kpi_uf.csv,54,periodo_uf_cliente,pedidos_entrega_avaliavel,int64,Pedidos com data de entrega real e estimada válidas.
+kpi_uf.csv,54,periodo_uf_cliente,pedidos_entrega_atrasada,int64,Pedidos entregues ao cliente depois do dia estimado.
+kpi_uf.csv,54,periodo_uf_cliente,pedidos_sem_avaliacao,int64,Pedidos entregues sem avaliação (fora do denominador do KPI1).
+kpi_uf.csv,54,periodo_uf_cliente,pct_sem_avaliacao,float64,Pedidos sem avaliação / pedidos entregues x 100.
+kpi_uf.csv,54,periodo_uf_cliente,kpi1_pct_avaliacao_ruim,float64,KPI1: pedidos com nota 1-2 / pedidos com avaliação x 100.
+kpi_uf.csv,54,periodo_uf_cliente,kpi3_pct_postagem_no_prazo,float64,KPI3: pedidos postados no prazo / pedidos elegíveis x 100.
+kpi_uf.csv,54,periodo_uf_cliente,pct_entrega_atrasada,float64,Entrega atrasada / entregas avaliáveis x 100.
+kpi_uf.csv,54,periodo_uf_cliente,itens,int64,Quantidade de itens (linhas de order_items).
+kpi_uf.csv,54,periodo_uf_cliente,soma_frete,float64,Numerador do KPI2: soma de freight_value dos itens (R$).
+kpi_uf.csv,54,periodo_uf_cliente,soma_preco_produtos,float64,Denominador do KPI2: soma de price dos itens (R$).
+kpi_uf.csv,54,periodo_uf_cliente,kpi2_pct_frete_sobre_produto,float64,KPI2: soma do frete dos itens / soma do preço dos itens x 100.
+kpi_uf.csv,54,periodo_uf_cliente,amostra_pequena,bool,True quando o denominador principal do grupo é menor que 30; interpretar com cautela.
+kpi_uf.csv,54,periodo_uf_cliente,regiao_cliente,object,Região brasileira derivada da UF do cliente (mapa explícito de 27 UFs).
+kpi_uf.csv,54,periodo_uf_cliente,granularidade,object,Unidade de análise de cada linha do arquivo.
+kpi_uf_seller_postagem.csv,40,periodo_uf_seller,periodo_comparativo,object,Rótulo da proxy acadêmica: 2024 = jan-ago/2017; 2025 = jan-ago/2018. Não são dados reais de 2024/2025.
+kpi_uf_seller_postagem.csv,40,periodo_uf_seller,seller_state,object,UF do seller.
+kpi_uf_seller_postagem.csv,40,periodo_uf_seller,pedido_seller_elegiveis,int64,Contagem na granularidade pedido-seller (não equivale a pedidos únicos): elegiveis.
+kpi_uf_seller_postagem.csv,40,periodo_uf_seller,pedido_seller_atrasadas,int64,Contagem na granularidade pedido-seller (não equivale a pedidos únicos): atrasadas.
+kpi_uf_seller_postagem.csv,40,periodo_uf_seller,sellers,int64,Sellers.
+kpi_uf_seller_postagem.csv,40,periodo_uf_seller,pct_postagem_atrasada,float64,Percentual (0-100): postagem atrasada.
+kpi_uf_seller_postagem.csv,40,periodo_uf_seller,amostra_pequena,bool,True quando o denominador principal do grupo é menor que 30; interpretar com cautela.
+kpi_uf_seller_postagem.csv,40,periodo_uf_seller,granularidade,object,Unidade de análise de cada linha do arquivo.
+origem_atraso_regiao.csv,10,periodo_regiao_cliente,periodo_comparativo,object,Rótulo da proxy acadêmica: 2024 = jan-ago/2017; 2025 = jan-ago/2018. Não são dados reais de 2024/2025.
+origem_atraso_regiao.csv,10,periodo_regiao_cliente,regiao_cliente,object,Região brasileira derivada da UF do cliente (mapa explícito de 27 UFs).
+origem_atraso_regiao.csv,10,periodo_regiao_cliente,pedidos,float64,Pedidos.
+origem_atraso_regiao.csv,10,periodo_regiao_cliente,pct_postagem_atrasada,float64,Percentual (0-100): postagem atrasada.
+origem_atraso_regiao.csv,10,periodo_regiao_cliente,pct_entrega_atrasada,float64,Entrega atrasada / entregas avaliáveis x 100.
+origem_atraso_regiao.csv,10,periodo_regiao_cliente,pct_entrega_atrasada_dado_postagem_no_prazo,float64,Percentual (0-100): entrega atrasada dado postagem no prazo.
+origem_atraso_regiao.csv,10,periodo_regiao_cliente,pct_entrega_atrasada_dado_postagem_atrasada,float64,Percentual (0-100): entrega atrasada dado postagem atrasada.
+origem_atraso_regiao.csv,10,periodo_regiao_cliente,mediana_dias_postagem_entrega,float64,Mediana: dias postagem entrega.
+origem_atraso_regiao.csv,10,periodo_regiao_cliente,mediana_dias_compra_entrega,float64,Mediana: dias compra entrega.
+origem_atraso_regiao.csv,10,periodo_regiao_cliente,granularidade,object,Unidade de análise de cada linha do arquivo.
+qualidade_dados.csv,216,verificacao,etapa,object,Notebook que gerou a verificação.
+qualidade_dados.csv,216,verificacao,tabela,object,Tabela de origem.
+qualidade_dados.csv,216,verificacao,verificacao,object,Nome da verificação de qualidade/validação.
+qualidade_dados.csv,216,verificacao,valor,int64,Resultado numérico (para validações: 1 = OK).
+qualidade_dados.csv,216,verificacao,detalhe,object,Detalhe/observação.
+qualidade_dados.csv,216,verificacao,granularidade,object,Unidade de análise de cada linha do arquivo.
+ranking_semanal_sellers_atraso.csv,2934,semana_seller (top 50 por semana),semana_prazo_postagem,object,Segunda-feira da semana do prazo limite de postagem.
+ranking_semanal_sellers_atraso.csv,2934,semana_seller (top 50 por semana),seller_id,object,Identificador do seller.
+ranking_semanal_sellers_atraso.csv,2934,semana_seller (top 50 por semana),ano_original,int64,Ano real da compra no dataset (2017 ou 2018). Datas originais não são alteradas.
+ranking_semanal_sellers_atraso.csv,2934,semana_seller (top 50 por semana),periodo_comparativo,object,Rótulo da proxy acadêmica: 2024 = jan-ago/2017; 2025 = jan-ago/2018. Não são dados reais de 2024/2025.
+ranking_semanal_sellers_atraso.csv,2934,semana_seller (top 50 por semana),seller_state,object,UF do seller.
+ranking_semanal_sellers_atraso.csv,2934,semana_seller (top 50 por semana),pedido_seller_elegiveis_postagem,int64,Contagem na granularidade pedido-seller (não equivale a pedidos únicos): elegiveis postagem.
+ranking_semanal_sellers_atraso.csv,2934,semana_seller (top 50 por semana),pedido_seller_postagem_atrasada,int64,Contagem na granularidade pedido-seller (não equivale a pedidos únicos): postagem atrasada.
+ranking_semanal_sellers_atraso.csv,2934,semana_seller (top 50 por semana),pct_postagem_atrasada,float64,Percentual (0-100): postagem atrasada.
+ranking_semanal_sellers_atraso.csv,2934,semana_seller (top 50 por semana),rank_semana,int64,Posição no ranking da semana.
+ranking_semanal_sellers_atraso.csv,2934,semana_seller (top 50 por semana),granularidade,object,Unidade de análise de cada linha do arquivo.
+relacao_atraso_avaliacao.csv,24,periodo_situacao_postagem_situacao_entrega,periodo_comparativo,object,Rótulo da proxy acadêmica: 2024 = jan-ago/2017; 2025 = jan-ago/2018. Não são dados reais de 2024/2025.
+relacao_atraso_avaliacao.csv,24,periodo_situacao_postagem_situacao_entrega,situacao_postagem,object,postagem no prazo / postagem atrasada / todos / sem dado.
+relacao_atraso_avaliacao.csv,24,periodo_situacao_postagem_situacao_entrega,situacao_entrega,object,entrega no prazo / entrega atrasada / todos / sem dado.
+relacao_atraso_avaliacao.csv,24,periodo_situacao_postagem_situacao_entrega,pedidos_com_avaliacao,int64,Denominador do KPI1: pedidos com avaliação válida (mais recente por pedido).
+relacao_atraso_avaliacao.csv,24,periodo_situacao_postagem_situacao_entrega,pedidos_avaliacao_ruim,int64,Numerador do KPI1: pedidos cuja avaliação mais recente tem nota 1 ou 2.
+relacao_atraso_avaliacao.csv,24,periodo_situacao_postagem_situacao_entrega,pct_avaliacao_ruim,float64,Percentual (0-100): avaliacao ruim.
+relacao_atraso_avaliacao.csv,24,periodo_situacao_postagem_situacao_entrega,pedidos_entrega_avaliavel,float64,Pedidos com data de entrega real e estimada válidas.
+relacao_atraso_avaliacao.csv,24,periodo_situacao_postagem_situacao_entrega,pedidos_entrega_atrasada,float64,Pedidos entregues ao cliente depois do dia estimado.
+relacao_atraso_avaliacao.csv,24,periodo_situacao_postagem_situacao_entrega,pct_entrega_atrasada,float64,Entrega atrasada / entregas avaliáveis x 100.
+relacao_atraso_avaliacao.csv,24,periodo_situacao_postagem_situacao_entrega,granularidade,object,Unidade de análise de cada linha do arquivo.
+testes_associacao.csv,12,periodo_comparacao_grupo,periodo_comparativo,object,Rótulo da proxy acadêmica: 2024 = jan-ago/2017; 2025 = jan-ago/2018. Não são dados reais de 2024/2025.
+testes_associacao.csv,12,periodo_comparacao_grupo,grupo,object,Grupo comparado.
+testes_associacao.csv,12,periodo_comparacao_grupo,numerador,int64,Numerador da taxa do grupo.
+testes_associacao.csv,12,periodo_comparacao_grupo,denominador,int64,Denominador da taxa do grupo.
+testes_associacao.csv,12,periodo_comparacao_grupo,pct,float64,numerador / denominador x 100.
+testes_associacao.csv,12,periodo_comparacao_grupo,qui2,float64,"Estatística qui-quadrado (associação, não causalidade)."
+testes_associacao.csv,12,periodo_comparacao_grupo,p_valor,float64,p-valor do qui-quadrado.
+testes_associacao.csv,12,periodo_comparacao_grupo,comparacao,object,Qual comparação o teste avalia.
+testes_associacao.csv,12,periodo_comparacao_grupo,granularidade,object,Unidade de análise de cada linha do arquivo.
+top_50_sellers_atraso.csv,150,seller_consolidado_top50; seller_periodo_top50,rank,int64,Posição no ranking por número de postagens atrasadas.
+top_50_sellers_atraso.csv,150,seller_consolidado_top50; seller_periodo_top50,seller_id,object,Identificador do seller.
+top_50_sellers_atraso.csv,150,seller_consolidado_top50; seller_periodo_top50,seller_state,object,UF do seller.
+top_50_sellers_atraso.csv,150,seller_consolidado_top50; seller_periodo_top50,seller_regiao,object,Região derivada da UF do seller.
+top_50_sellers_atraso.csv,150,seller_consolidado_top50; seller_periodo_top50,pedido_seller_total,int64,Contagem na granularidade pedido-seller (não equivale a pedidos únicos): total.
+top_50_sellers_atraso.csv,150,seller_consolidado_top50; seller_periodo_top50,pedido_seller_elegiveis_postagem,int64,Contagem na granularidade pedido-seller (não equivale a pedidos únicos): elegiveis postagem.
+top_50_sellers_atraso.csv,150,seller_consolidado_top50; seller_periodo_top50,pedido_seller_postagem_atrasada,int64,Contagem na granularidade pedido-seller (não equivale a pedidos únicos): postagem atrasada.
+top_50_sellers_atraso.csv,150,seller_consolidado_top50; seller_periodo_top50,pedido_seller_com_avaliacao,int64,Contagem na granularidade pedido-seller (não equivale a pedidos únicos): com avaliacao.
+top_50_sellers_atraso.csv,150,seller_consolidado_top50; seller_periodo_top50,pedido_seller_avaliacao_ruim,int64,Contagem na granularidade pedido-seller (não equivale a pedidos únicos): avaliacao ruim.
+top_50_sellers_atraso.csv,150,seller_consolidado_top50; seller_periodo_top50,pedido_seller_entrega_avaliavel,int64,Contagem na granularidade pedido-seller (não equivale a pedidos únicos): entrega avaliavel.
+top_50_sellers_atraso.csv,150,seller_consolidado_top50; seller_periodo_top50,pedido_seller_entrega_atrasada,int64,Contagem na granularidade pedido-seller (não equivale a pedidos únicos): entrega atrasada.
+top_50_sellers_atraso.csv,150,seller_consolidado_top50; seller_periodo_top50,itens,int64,Quantidade de itens (linhas de order_items).
+top_50_sellers_atraso.csv,150,seller_consolidado_top50; seller_periodo_top50,soma_preco,float64,Soma de price dos itens (R$).
+top_50_sellers_atraso.csv,150,seller_consolidado_top50; seller_periodo_top50,soma_frete,float64,Numerador do KPI2: soma de freight_value dos itens (R$).
+top_50_sellers_atraso.csv,150,seller_consolidado_top50; seller_periodo_top50,pedido_seller_postagem_no_prazo,int64,Contagem na granularidade pedido-seller (não equivale a pedidos únicos): postagem no prazo.
+top_50_sellers_atraso.csv,150,seller_consolidado_top50; seller_periodo_top50,pct_postagem_atrasada,float64,Percentual (0-100): postagem atrasada.
+top_50_sellers_atraso.csv,150,seller_consolidado_top50; seller_periodo_top50,pct_postagem_no_prazo,float64,Percentual (0-100): postagem no prazo.
+top_50_sellers_atraso.csv,150,seller_consolidado_top50; seller_periodo_top50,pct_avaliacao_ruim,float64,Percentual (0-100): avaliacao ruim.
+top_50_sellers_atraso.csv,150,seller_consolidado_top50; seller_periodo_top50,pct_entrega_atrasada,float64,Entrega atrasada / entregas avaliáveis x 100.
+top_50_sellers_atraso.csv,150,seller_consolidado_top50; seller_periodo_top50,pct_frete_sobre_produto,float64,Percentual (0-100): frete sobre produto.
+top_50_sellers_atraso.csv,150,seller_consolidado_top50; seller_periodo_top50,amostra_pequena,bool,True quando o denominador principal do grupo é menor que 30; interpretar com cautela.
+top_50_sellers_atraso.csv,150,seller_consolidado_top50; seller_periodo_top50,granularidade,object,Unidade de análise de cada linha do arquivo.
+top_50_sellers_atraso.csv,150,seller_consolidado_top50; seller_periodo_top50,periodo_comparativo,object,Rótulo da proxy acadêmica: 2024 = jan-ago/2017; 2025 = jan-ago/2018. Não são dados reais de 2024/2025.
+top_50_sellers_atraso.csv,150,seller_consolidado_top50; seller_periodo_top50,pct_acumulado_atrasos,float64,Percentual (0-100): acumulado atrasos.
+top_50_sellers_atraso.csv,150,seller_consolidado_top50; seller_periodo_top50,ano_original,float64,Ano real da compra no dataset (2017 ou 2018). Datas originais não são alteradas.
+qualidade_dados.csv,216,verificacao,(arquivo),,"Inventário, descartes e validações da pipeline."

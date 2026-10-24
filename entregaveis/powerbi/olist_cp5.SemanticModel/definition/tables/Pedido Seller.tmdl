@@ -1,0 +1,71 @@
+/// Fato: 1 linha por par pedido × seller. Não é pedido único: usar só para ranking de sellers.
+table 'Pedido Seller'
+	lineageTag: ad96d16a-1ec0-5874-8b7f-522cca92ebab
+
+	column 'ID Pedido'
+		dataType: string
+		isHidden
+		lineageTag: 63ea4dd1-d508-5338-9694-3811819620e1
+		summarizeBy: none
+		sourceColumn: ID Pedido
+
+	column 'ID Seller'
+		dataType: string
+		isHidden
+		lineageTag: 19fa1caa-32be-5363-9a16-8db0581a9520
+		summarizeBy: none
+		sourceColumn: ID Seller
+
+	column 'Data Compra'
+		dataType: dateTime
+		formatString: dd/mm/yyyy
+		isHidden
+		lineageTag: 68ad4732-9a47-5e03-8871-b9b3ad465fa1
+		summarizeBy: none
+		sourceColumn: Data Compra
+
+	column 'UF Cliente'
+		dataType: string
+		isHidden
+		lineageTag: 804d0932-99c8-5319-9202-0eaaa8a3304d
+		summarizeBy: none
+		sourceColumn: UF Cliente
+
+	column 'Postagem Elegível'
+		dataType: boolean
+		lineageTag: 4e17327d-56c7-5980-aced-d3f1ad3d938f
+		summarizeBy: none
+		sourceColumn: Postagem Elegível
+
+	column 'Postagem Atrasada'
+		dataType: boolean
+		lineageTag: 494f5042-28ff-5079-b268-24f86f203037
+		summarizeBy: none
+		sourceColumn: Postagem Atrasada
+
+	column 'Avaliação Ruim'
+		dataType: boolean
+		lineageTag: 85d73571-593c-5d6d-8998-1e4c62f220da
+		summarizeBy: none
+		sourceColumn: Avaliação Ruim
+
+	partition 'Pedido Seller' = m
+		mode: import
+		source =
+				let
+				    Fonte = Csv.Document(File.Contents(PastaDados & "pedido_seller.csv"), [Delimiter = ",", Encoding = 65001, QuoteStyle = QuoteStyle.Csv]),
+				    Cabecalhos = Table.PromoteHeaders(Fonte, [PromoteAllScalars = true]),
+				    Tipos = Table.TransformColumns(Cabecalhos, {
+				        {"id_pedido", each if _ = "" then null else _, type text},
+				        {"id_seller", each if _ = "" then null else _, type text},
+				        {"data_compra", each Date.FromText(_, [Format = "yyyy-MM-dd", Culture = "en-US"]), type date},
+				        {"uf_cliente", each if _ = "" then null else _, type text},
+				        {"postagem_elegivel", each if _ = "" then null else _ = "true", type logical},
+				        {"postagem_atrasada", each if _ = "" then null else _ = "true", type logical},
+				        {"avaliacao_ruim", each if _ = "" then null else _ = "true", type logical}
+				    }),
+				    Nomes = Table.RenameColumns(Tipos, {{"id_pedido", "ID Pedido"}, {"id_seller", "ID Seller"}, {"data_compra", "Data Compra"}, {"uf_cliente", "UF Cliente"}, {"postagem_elegivel", "Postagem Elegível"}, {"postagem_atrasada", "Postagem Atrasada"}, {"avaliacao_ruim", "Avaliação Ruim"}})
+				in
+				    Nomes
+
+	annotation PBI_ResultType = Table

@@ -1,0 +1,47 @@
+/// Dimensão de sellers presentes no recorte.
+table Sellers
+	lineageTag: b8e31519-20a4-545d-9937-2b219a7c3cf2
+
+	column 'ID Seller'
+		dataType: string
+		isHidden
+		lineageTag: 3a129c6b-32f8-51a8-981d-19e0ac2f7248
+		summarizeBy: none
+		sourceColumn: ID Seller
+
+	/// Rótulo curto: 'Seller' + 8 primeiros caracteres do seller_id.
+	column Seller
+		dataType: string
+		lineageTag: 0e191006-7854-5148-96bb-3cadd6f66d40
+		summarizeBy: none
+		sourceColumn: Seller
+
+	column 'UF Seller'
+		dataType: string
+		lineageTag: c559d0b3-a17d-5836-90bd-c8013baf9857
+		summarizeBy: none
+		sourceColumn: UF Seller
+
+	column 'Região Seller'
+		dataType: string
+		lineageTag: fcae7fdd-9fd1-5f32-82c9-5a608a48be92
+		summarizeBy: none
+		sourceColumn: Região Seller
+
+	partition Sellers = m
+		mode: import
+		source =
+				let
+				    Fonte = Csv.Document(File.Contents(PastaDados & "sellers.csv"), [Delimiter = ",", Encoding = 65001, QuoteStyle = QuoteStyle.Csv]),
+				    Cabecalhos = Table.PromoteHeaders(Fonte, [PromoteAllScalars = true]),
+				    Tipos = Table.TransformColumns(Cabecalhos, {
+				        {"id_seller", each if _ = "" then null else _, type text},
+				        {"seller", each if _ = "" then null else _, type text},
+				        {"uf_seller", each if _ = "" then null else _, type text},
+				        {"regiao_seller", each if _ = "" then null else _, type text}
+				    }),
+				    Nomes = Table.RenameColumns(Tipos, {{"id_seller", "ID Seller"}, {"seller", "Seller"}, {"uf_seller", "UF Seller"}, {"regiao_seller", "Região Seller"}})
+				in
+				    Nomes
+
+	annotation PBI_ResultType = Table

@@ -1,0 +1,74 @@
+/// Dimensão de datas contínua 2017–2018, marcada como tabela de datas (dataCategory Time + chave Data).
+table 'Calendário'
+	dataCategory: Time
+	lineageTag: 9314aebc-f560-55ba-bf33-c76683e92dc7
+
+	column Data
+		dataType: dateTime
+		isKey
+		formatString: dd/mm/yyyy
+		lineageTag: c2a0e5dd-2cf3-5af0-83ce-cd1c807f4238
+		summarizeBy: none
+		sourceColumn: Data
+
+	/// Ano real no dataset (2017 = proxy 2024; 2018 = proxy 2025).
+	column 'Ano Original'
+		dataType: int64
+		formatString: 0
+		lineageTag: 44919d67-e4ec-5570-bcaf-2693a4479a4c
+		summarizeBy: none
+		sourceColumn: Ano Original
+
+	/// Rótulo da proxy acadêmica; não são dados reais de 2024/2025.
+	column 'Período'
+		dataType: string
+		lineageTag: ca58a055-0a4a-562e-b337-210d38ca89c7
+		summarizeBy: none
+		sourceColumn: Período
+		sortByColumn: 'Ano Original'
+
+	column 'Mês Número'
+		dataType: int64
+		formatString: 0
+		isHidden
+		lineageTag: 43d9ac2e-1691-5b29-87aa-df9a24d55dd7
+		summarizeBy: none
+		sourceColumn: Mês Número
+
+	column 'Mês'
+		dataType: string
+		lineageTag: fc593c5b-6d89-5372-8b7d-d9547be8b068
+		summarizeBy: none
+		sourceColumn: Mês
+		sortByColumn: 'Mês Número'
+
+	column 'Ano-Mês Original'
+		dataType: string
+		lineageTag: 859de87f-817c-58a1-a0ee-092ebebab420
+		summarizeBy: none
+		sourceColumn: Ano-Mês Original
+
+	column 'Janela Jan-Ago'
+		dataType: boolean
+		lineageTag: 6f0dfc98-91c9-525b-8c94-5e1d4ee94db8
+		summarizeBy: none
+		sourceColumn: Janela Jan-Ago
+
+	partition 'Calendário' = m
+		mode: import
+		source =
+				let
+				    Inicio = #date(2017, 1, 1),
+				    Fim = #date(2018, 12, 31),
+				    Datas = List.Dates(Inicio, Duration.Days(Fim - Inicio) + 1, #duration(1, 0, 0, 0)),
+				    Tabela = Table.FromList(Datas, Splitter.SplitByNothing(), type table [Data = date]),
+				    Ano = Table.AddColumn(Tabela, "Ano Original", each Date.Year([Data]), Int64.Type),
+				    Periodo = Table.AddColumn(Ano, "Período", each if [Ano Original] = 2017 then "2024 (proxy jan–ago/2017)" else "2025 (proxy jan–ago/2018)", type text),
+				    MesNumero = Table.AddColumn(Periodo, "Mês Número", each Date.Month([Data]), Int64.Type),
+				    Mes = Table.AddColumn(MesNumero, "Mês", each {"jan", "fev", "mar", "abr", "mai", "jun", "jul", "ago", "set", "out", "nov", "dez"}{[Mês Número] - 1}, type text),
+				    AnoMes = Table.AddColumn(Mes, "Ano-Mês Original", each Date.ToText([Data], [Format = "yyyy-MM", Culture = "en-US"]), type text),
+				    Janela = Table.AddColumn(AnoMes, "Janela Jan-Ago", each [Mês Número] <= 8, type logical)
+				in
+				    Janela
+
+	annotation PBI_ResultType = Table

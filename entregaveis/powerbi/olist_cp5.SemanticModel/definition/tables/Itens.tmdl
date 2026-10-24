@@ -1,0 +1,84 @@
+/// Fato: 1 linha por item de pedido entregue. Base do KPI02 (soma frete ÷ soma preço).
+table Itens
+	lineageTag: c169a867-2473-5574-8c7c-14244dbe9a7d
+
+	column 'ID Pedido'
+		dataType: string
+		isHidden
+		lineageTag: bfd49cf6-7b38-5b66-9451-d22ef9722c55
+		summarizeBy: none
+		sourceColumn: ID Pedido
+
+	column Item
+		dataType: int64
+		formatString: 0
+		isHidden
+		lineageTag: 6114be88-39ee-5c3c-a5ea-bbec368e44d8
+		summarizeBy: none
+		sourceColumn: Item
+
+	column 'Data Compra'
+		dataType: dateTime
+		formatString: dd/mm/yyyy
+		isHidden
+		lineageTag: ddb6a090-c66b-52d6-86b9-34e1dd659e34
+		summarizeBy: none
+		sourceColumn: Data Compra
+
+	column 'UF Cliente'
+		dataType: string
+		isHidden
+		lineageTag: 8441aeef-dacc-570d-b6de-6fdc77fa2ec1
+		summarizeBy: none
+		sourceColumn: UF Cliente
+
+	column 'ID Seller'
+		dataType: string
+		isHidden
+		lineageTag: 835e9f58-36a0-5477-945e-7da0bf3d7a0b
+		summarizeBy: none
+		sourceColumn: ID Seller
+
+	column Categoria
+		dataType: string
+		lineageTag: 897da80d-dede-5b92-8d0e-a895f3df5b7f
+		summarizeBy: none
+		sourceColumn: Categoria
+
+	column 'Preço'
+		dataType: double
+		formatString: R$ #,0.00
+		isHidden
+		lineageTag: c43226d2-0aca-553e-9ddd-4d724598d5dc
+		summarizeBy: none
+		sourceColumn: Preço
+
+	column Frete
+		dataType: double
+		formatString: R$ #,0.00
+		isHidden
+		lineageTag: c8a13e5c-f99e-5f9b-9963-fa401d30013e
+		summarizeBy: none
+		sourceColumn: Frete
+
+	partition Itens = m
+		mode: import
+		source =
+				let
+				    Fonte = Csv.Document(File.Contents(PastaDados & "itens.csv"), [Delimiter = ",", Encoding = 65001, QuoteStyle = QuoteStyle.Csv]),
+				    Cabecalhos = Table.PromoteHeaders(Fonte, [PromoteAllScalars = true]),
+				    Tipos = Table.TransformColumns(Cabecalhos, {
+				        {"id_pedido", each if _ = "" then null else _, type text},
+				        {"id_item", each if _ = "" then null else Int64.From(_), Int64.Type},
+				        {"data_compra", each Date.FromText(_, [Format = "yyyy-MM-dd", Culture = "en-US"]), type date},
+				        {"uf_cliente", each if _ = "" then null else _, type text},
+				        {"id_seller", each if _ = "" then null else _, type text},
+				        {"categoria", each if _ = "" then null else _, type text},
+				        {"preco", each if _ = "" then null else Number.FromText(_, "en-US"), type number},
+				        {"frete", each if _ = "" then null else Number.FromText(_, "en-US"), type number}
+				    }),
+				    Nomes = Table.RenameColumns(Tipos, {{"id_pedido", "ID Pedido"}, {"id_item", "Item"}, {"data_compra", "Data Compra"}, {"uf_cliente", "UF Cliente"}, {"id_seller", "ID Seller"}, {"categoria", "Categoria"}, {"preco", "Preço"}, {"frete", "Frete"}})
+				in
+				    Nomes
+
+	annotation PBI_ResultType = Table

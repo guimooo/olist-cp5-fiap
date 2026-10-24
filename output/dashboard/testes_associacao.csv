@@ -1,0 +1,13 @@
+periodo_comparativo,grupo,numerador,denominador,pct,qui2,p_valor,comparacao,granularidade
+2024 (proxy jan-ago/2017),entrega atrasada,427,740,57.7027027027027,1790.8542073872209,0.0,avaliacao_ruim_por_situacao_entrega,periodo_comparacao_grupo
+2024 (proxy jan-ago/2017),entrega no prazo,1885,21096,8.935343193022375,1790.8542073872209,0.0,avaliacao_ruim_por_situacao_entrega,periodo_comparacao_grupo
+2025 (proxy jan-ago/2018),entrega atrasada,2514,3994,62.9444166249374,9166.904440847948,0.0,avaliacao_ruim_por_situacao_entrega,periodo_comparacao_grupo
+2025 (proxy jan-ago/2018),entrega no prazo,4501,48468,9.286539572501445,9166.904440847948,0.0,avaliacao_ruim_por_situacao_entrega,periodo_comparacao_grupo
+2024 (proxy jan-ago/2017),postagem atrasada,356,1865,19.08847184986595,154.66139338154406,1.6603139578765078e-35,avaliacao_ruim_por_situacao_postagem,periodo_comparacao_grupo
+2024 (proxy jan-ago/2017),postagem no prazo,1956,19971,9.794201592308847,154.66139338154406,1.6603139578765078e-35,avaliacao_ruim_por_situacao_postagem,periodo_comparacao_grupo
+2025 (proxy jan-ago/2018),postagem atrasada,1098,4470,24.563758389261743,527.298501053158,1.0931440082308072e-116,avaliacao_ruim_por_situacao_postagem,periodo_comparacao_grupo
+2025 (proxy jan-ago/2018),postagem no prazo,5918,47998,12.329680403350139,527.298501053158,1.0931440082308072e-116,avaliacao_ruim_por_situacao_postagem,periodo_comparacao_grupo
+2024 (proxy jan-ago/2017),postagem atrasada,233,1894,12.302006335797254,473.5120309545417,5.514816784792729e-105,entrega_atrasada_por_situacao_postagem,periodo_comparacao_grupo
+2024 (proxy jan-ago/2017),postagem no prazo,536,20103,2.666268716112023,473.5120309545417,5.514816784792729e-105,entrega_atrasada_por_situacao_postagem,periodo_comparacao_grupo
+2025 (proxy jan-ago/2018),postagem atrasada,1010,4511,22.38971403236533,1485.1799941441946,0.0,entrega_atrasada_por_situacao_postagem,periodo_comparacao_grupo
+2025 (proxy jan-ago/2018),postagem no prazo,3068,48266,6.35644138731198,1485.1799941441946,0.0,entrega_atrasada_por_situacao_postagem,periodo_comparacao_grupo

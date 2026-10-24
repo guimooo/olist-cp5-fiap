@@ -1,0 +1,188 @@
+-- V01 KPIs por período (F1 DIVIDE, F2 contagens) vs kpi_resumo_periodo.csv
+EVALUATE
+SUMMARIZECOLUMNS (
+    'Calendário'[Ano Original],
+    "Pedidos Entregues", [Pedidos Entregues],
+    "Pedidos Avaliados", [Pedidos Avaliados],
+    "Pedidos Ruins", [Pedidos com Avaliação Ruim],
+    "KPI01", [KPI01 % Avaliações Ruins],
+    "Frete", [Frete Total],
+    "Produtos", [Valor dos Produtos],
+    "KPI02", [KPI02 % Frete sobre Produtos],
+    "Elegiveis", [Pedidos Elegíveis para Postagem],
+    "No Prazo", [Pedidos Postados no Prazo],
+    "KPI03", [KPI03 % Postagem no Prazo],
+    "Entrega Atrasada", [% Entrega Atrasada]
+)
+-- ##
+-- V02 Inteligência de tempo (F5) no contexto de 2018: anterior deve ser igual ao valor de 2017
+EVALUATE
+CALCULATETABLE (
+    ROW (
+        "KPI01 2018", [KPI01 % Avaliações Ruins],
+        "KPI01 Período Anterior (SAMEPERIODLASTYEAR)", [KPI01 Período Anterior],
+        "KPI01 Variação pp", [KPI01 Variação vs Período Anterior (p.p.)],
+        "KPI02 Período Anterior (DATEADD)", [KPI02 Período Anterior],
+        "KPI02 Variação pp", [KPI02 Variação vs Período Anterior (p.p.)],
+        "KPI03 Período Anterior (DATEADD)", [KPI03 Período Anterior],
+        "KPI03 Variação pp", [KPI03 Variação vs Período Anterior (p.p.)]
+    ),
+    'Calendário'[Período] = "2025 (proxy jan–ago/2018)"
+)
+-- ##
+-- V03 TOTALYTD (F5): acumulado no ano por mês de 2018; agosto deve igualar o KPI01 de 2018
+EVALUATE
+CALCULATETABLE (
+    SUMMARIZECOLUMNS (
+        'Calendário'[Mês Número],
+        "KPI01 Mês", [KPI01 % Avaliações Ruins],
+        "KPI01 Acumulado no Ano", [KPI01 Acumulado no Ano],
+        "Entrega Atrasada", [% Entrega Atrasada]
+    ),
+    'Calendário'[Ano Original] = 2018
+)
+-- ##
+-- V04 Contexto de filtro (F3 ALL / REMOVEFILTERS) e F4 por UF, 2018, top 6 por excedente
+EVALUATE
+TOPN (
+    6,
+    CALCULATETABLE (
+        SUMMARIZECOLUMNS (
+            'Local Cliente'[UF],
+            "Avaliados", [Pedidos Avaliados],
+            "KPI01", [KPI01 % Avaliações Ruins],
+            "KPI01 Todas as Regiões (ALL)", [KPI01 Todas as Regiões],
+            "Desvio pp", [KPI01 Desvio vs Todas as Regiões (p.p.)],
+            "Ruins acima da média (REMOVEFILTERS)", [Pedidos Ruins acima da Média],
+            "Entrega Atrasada", [% Entrega Atrasada]
+        ),
+        'Calendário'[Ano Original] = 2018
+    ),
+    [Ruins acima da média (REMOVEFILTERS)], DESC
+)
+-- ##
+-- V05 Frete por região 2018 (KPI02 regional + cor F6) vs kpi_regiao.csv
+EVALUATE
+CALCULATETABLE (
+    SUMMARIZECOLUMNS (
+        'Local Cliente'[Região],
+        "Pedidos", [Pedidos Entregues],
+        "KPI02", [KPI02 % Frete sobre Produtos],
+        "KPI01", [KPI01 % Avaliações Ruins],
+        "Limite", [Limite Frete KPI02],
+        "Cor", [Cor Frete Região]
+    ),
+    'Calendário'[Ano Original] = 2018
+)
+-- ##
+-- V06 Cruzamento postagem x entrega 2018 vs relacao_atraso_avaliacao.csv
+EVALUATE
+CALCULATETABLE (
+    SUMMARIZECOLUMNS (
+        Pedidos[Situação Postagem],
+        Pedidos[Situação Entrega],
+        "Avaliados", [Pedidos Avaliados],
+        "Ruins", [Pedidos com Avaliação Ruim],
+        "KPI01", [KPI01 % Avaliações Ruins]
+    ),
+    'Calendário'[Ano Original] = 2018
+)
+-- ##
+-- V07 Ranking de sellers 2018 (F4 RANKX + F3 ALLSELECTED; UF na linha não pode quebrar o ranking), top 10
+EVALUATE
+TOPN (
+    10,
+    CALCULATETABLE (
+        SUMMARIZECOLUMNS (
+            Sellers[Seller],
+            Sellers[UF Seller],
+            "Pares", [Pares Pedido-Seller Elegíveis],
+            "Atrasadas", [Postagens Atrasadas],
+            "No prazo", [% Postagem no Prazo do Seller],
+            "Participação (REMOVEFILTERS Sellers)", [% Participação nas Postagens Atrasadas],
+            "Ranking (RANKX)", [Ranking Seller por Postagens Atrasadas]
+        ),
+        'Calendário'[Ano Original] = 2018
+    ),
+    [Atrasadas], DESC, [Pares], DESC
+)
+ORDER BY [Atrasadas] DESC
+-- ##
+-- V08 Soma do top 10 do ranking em 2018 (deve dar 896 de 4.522)
+EVALUATE
+VAR Ranking =
+    CALCULATETABLE (
+        SUMMARIZECOLUMNS (
+            Sellers[Seller],
+            "rk", [Ranking Seller por Postagens Atrasadas],
+            "atr", [Postagens Atrasadas],
+            "pares", [Pares Pedido-Seller Elegíveis]
+        ),
+        'Calendário'[Ano Original] = 2018
+    )
+VAR Top10 = FILTER ( Ranking, NOT ISBLANK ( [rk] ) && [rk] <= 10 )
+RETURN
+    ROW (
+        "Sellers no top", COUNTROWS ( Top10 ),
+        "Atrasadas top10", SUMX ( Top10, [atr] ),
+        "Atrasadas total", CALCULATE ( [Postagens Atrasadas], 'Calendário'[Ano Original] = 2018 ),
+        "Pares top10", SUMX ( Top10, [pares] ),
+        "Pares total", CALCULATE ( [Pares Pedido-Seller Elegíveis], 'Calendário'[Ano Original] = 2018 )
+    )
+-- ##
+-- V09 Iteradoras (F4 SUMX, AVERAGEX) por período; SUMX deve igualar Frete + Produtos
+EVALUATE
+SUMMARIZECOLUMNS (
+    'Calendário'[Ano Original],
+    "Valor Pago (SUMX)", [Valor Pago Produtos mais Frete],
+    "Frete + Produtos (SUM)", [Frete Total] + [Valor dos Produtos],
+    "Nota Média (AVERAGEX)", [Nota Média de Avaliação],
+    "Dias postagem-entrega (AVERAGEX)", [Média de Dias Postagem até Entrega]
+)
+-- ##
+-- V10 Status (F6 VAR/RETURN + SWITCH(TRUE())) por período
+EVALUATE
+SUMMARIZECOLUMNS (
+    'Calendário'[Período],
+    "KPI01 Status", [KPI01 Status],
+    "KPI02 Status", [KPI02 Status],
+    "KPI03 Status", [KPI03 Status],
+    "Cores", [KPI01 Cor Status] & " " & [KPI02 Cor Status] & " " & [KPI03 Cor Status]
+)
+-- ##
+-- V12 DIVIDE com denominador zero/vazio: recorte sem dados (set/2018) deve retornar vazio, sem erro
+EVALUATE
+CALCULATETABLE (
+    ROW ( "KPI01", [KPI01 % Avaliações Ruins], "KPI02", [KPI02 % Frete sobre Produtos], "KPI03", [KPI03 % Postagem no Prazo], "Status", [KPI01 Status] ),
+    'Calendário'[Ano-Mês Original] = "2018-09"
+)
+-- ##
+-- V13 Participação (REMOVEFILTERS Sellers) mantém o filtro de região: soma dentro do Nordeste = 100%
+EVALUATE
+CALCULATETABLE (
+    ROW (
+        "Soma participação",
+            SUMX ( VALUES ( Sellers[Seller] ), [% Participação nas Postagens Atrasadas] ),
+        "Atrasadas Nordeste", [Postagens Atrasadas]
+    ),
+    'Calendário'[Ano Original] = 2018,
+    'Local Cliente'[Região] = "Nordeste"
+)
+-- ##
+-- V14 RANKX com ALLSELECTED respeita o filtro de região: top 5 dentro do Nordeste (sellers ranqueados só entre os pedidos de clientes do NE)
+EVALUATE
+TOPN (
+    5,
+    CALCULATETABLE (
+        SUMMARIZECOLUMNS (
+            Sellers[Seller],
+            "Pares", [Pares Pedido-Seller Elegíveis],
+            "Atrasadas", [Postagens Atrasadas],
+            "Ranking", [Ranking Seller por Postagens Atrasadas]
+        ),
+        'Calendário'[Ano Original] = 2018,
+        'Local Cliente'[Região] = "Nordeste"
+    ),
+    [Atrasadas], DESC
+)
+ORDER BY [Atrasadas] DESC

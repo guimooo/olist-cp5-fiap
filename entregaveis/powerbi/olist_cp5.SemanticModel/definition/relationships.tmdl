@@ -1,0 +1,32 @@
+relationship c41a5c92-0a4e-5424-a67e-220caa8ce26b
+	fromColumn: Pedidos.'Data Compra'
+	toColumn: 'Calendário'.Data
+
+relationship dfd6c40c-d361-56ba-bc16-cefca3f57e67
+	fromColumn: Itens.'Data Compra'
+	toColumn: 'Calendário'.Data
+
+relationship 70d52c01-16d0-50bb-b9bc-50664e45d9b7
+	fromColumn: 'Pedido Seller'.'Data Compra'
+	toColumn: 'Calendário'.Data
+
+relationship 3d6f4e4c-c07a-5eca-9fde-2ef87df4013c
+	fromColumn: Pedidos.'UF Cliente'
+	toColumn: 'Local Cliente'.UF
+
+relationship 9b1093b1-8db3-5134-8322-eb35d74fec04
+	fromColumn: Itens.'UF Cliente'
+	toColumn: 'Local Cliente'.UF
+
+relationship 8440863f-9fc0-55ed-9b61-645a72011095
+	fromColumn: 'Pedido Seller'.'UF Cliente'
+	toColumn: 'Local Cliente'.UF
+
+relationship c4ce78d4-3b0a-528c-9ef0-8a7e34e0596f
+	fromColumn: Itens.'ID Seller'
+	toColumn: Sellers.'ID Seller'
+
+relationship f06555d5-62ec-5c3d-bf25-2830ac4a45b8
+	fromColumn: 'Pedido Seller'.'ID Seller'
+	toColumn: Sellers.'ID Seller'
+

@@ -1,0 +1,490 @@
+/// Tabela dedicada a todas as medidas DAX do relatório.
+table Medidas
+	lineageTag: 0724f8de-fe66-5c3e-899c-8bcd14a59eba
+
+	/// Proxy 2024 informada na proposta E1.
+	measure 'Referência Proposta 2024 KPI01' = 0.106
+		formatString: 0.0%
+		displayFolder: 0. Metas e limites
+		lineageTag: 377c0965-24d7-5fdf-ad44-efd5d3bb70a3
+
+	/// Proxy 2025 informada na proposta E1.
+	measure 'Referência Proposta 2025 KPI01' = 0.134
+		formatString: 0.0%
+		displayFolder: 0. Metas e limites
+		lineageTag: 206a12cf-8e57-5918-aa9f-84abb9d13b9d
+
+	/// Passo intermediário de 2026 (planejamento, não observado).
+	measure 'Marco 2026 KPI01' = 0.12
+		formatString: 0.0%
+		displayFolder: 0. Metas e limites
+		lineageTag: 64c53a11-5c19-5262-93ec-a0f7be8e997a
+
+	/// Alvo até dez/2027.
+	measure 'Meta 2027 KPI01' = 0.10
+		formatString: 0.0%
+		displayFolder: 0. Metas e limites
+		lineageTag: 15678e80-3982-5a6e-baed-7abe0ee8e7c1
+
+	/// Proxy 2024 informada na proposta E1.
+	measure 'Referência Proposta 2024 KPI02' = 0.160
+		formatString: 0.0%
+		displayFolder: 0. Metas e limites
+		lineageTag: ec010ec0-b94f-53e8-8323-88028ab3d9a8
+
+	/// Proxy 2025 informada na proposta E1.
+	measure 'Referência Proposta 2025 KPI02' = 0.171
+		formatString: 0.0%
+		displayFolder: 0. Metas e limites
+		lineageTag: 3f3601d5-bbab-5653-b811-759e06fea311
+
+	/// Teto do frete sobre produtos em 2026 e 2027 (KPI geral).
+	measure 'Limite Frete KPI02' = 0.171
+		formatString: 0.0%
+		displayFolder: 0. Metas e limites
+		lineageTag: d4b8facb-edb7-57e0-8e89-325689337519
+
+	/// Proxy 2024 informada na proposta E1.
+	measure 'Referência Proposta 2024 KPI03' = 0.914
+		formatString: 0.0%
+		displayFolder: 0. Metas e limites
+		lineageTag: dbd609a4-78b6-584e-97a7-c79be59a9cc5
+
+	/// Proxy 2025 informada na proposta E1.
+	measure 'Referência Proposta 2025 KPI03' = 0.915
+		formatString: 0.0%
+		displayFolder: 0. Metas e limites
+		lineageTag: 1c478f2b-755c-58bc-8f03-16405697461c
+
+	/// Passo intermediário de 2026 (planejamento, não observado).
+	measure 'Marco 2026 KPI03' = 0.95
+		formatString: 0.0%
+		displayFolder: 0. Metas e limites
+		lineageTag: 59413491-0726-5ca6-9410-48d03b953f4e
+
+	/// Alvo de 2027.
+	measure 'Meta 2027 KPI03' = 0.97
+		formatString: 0.0%
+		displayFolder: 0. Metas e limites
+		lineageTag: 441fb167-0de7-5d87-b82e-39fc7f56bd73
+
+	/// Pedidos únicos entregues no recorte. [F2]
+	measure 'Pedidos Entregues' = DISTINCTCOUNT ( Pedidos[ID Pedido] )
+		formatString: #,0
+		displayFolder: 2. Contagens
+		lineageTag: 2e90e8d7-a75f-52d1-8265-92c5cc997feb
+
+	/// Denominador do KPI01: pedidos com avaliação válida (nota 1–5). [F2]
+	measure 'Pedidos Avaliados' =
+			CALCULATE (
+			    COUNTROWS ( Pedidos ),
+			    KEEPFILTERS ( Pedidos[Nota Avaliação] IN { 1, 2, 3, 4, 5 } )
+			)
+		formatString: #,0
+		displayFolder: 2. Contagens
+		lineageTag: 7c1c60c3-6fd6-553e-97de-094f4de74578
+
+	/// Numerador do KPI01: pedidos únicos com nota 1 ou 2. [F2]
+	measure 'Pedidos com Avaliação Ruim' =
+			CALCULATE (
+			    DISTINCTCOUNT ( Pedidos[ID Pedido] ),
+			    KEEPFILTERS ( Pedidos[Nota Avaliação] IN { 1, 2 } )
+			)
+		formatString: #,0
+		displayFolder: 2. Contagens
+		lineageTag: 1e403a7a-e860-5f23-95eb-e1b32cd2b3d5
+
+	/// Denominador do KPI03: pedidos com data de postagem e prazo limite. [F2]
+	measure 'Pedidos Elegíveis para Postagem' =
+			CALCULATE (
+			    COUNTROWS ( Pedidos ),
+			    KEEPFILTERS ( Pedidos[Postagem Elegível] = TRUE () )
+			)
+		formatString: #,0
+		displayFolder: 2. Contagens
+		lineageTag: 8ec22f97-3e3d-5945-9150-ba1baf4b5369
+
+	/// Numerador do KPI03: postagem até o menor shipping_limit_date do pedido. [F2]
+	measure 'Pedidos Postados no Prazo' =
+			CALCULATE (
+			    COUNTROWS ( Pedidos ),
+			    KEEPFILTERS ( Pedidos[Postagem Elegível] = TRUE () ),
+			    KEEPFILTERS ( Pedidos[Postagem no Prazo] = TRUE () )
+			)
+		formatString: #,0
+		displayFolder: 2. Contagens
+		lineageTag: a6edd91a-e297-56c7-9829-811681b70e10
+
+	/// Pedidos com data de entrega e data estimada. [F2]
+	measure 'Pedidos com Entrega Avaliável' =
+			CALCULATE (
+			    COUNTROWS ( Pedidos ),
+			    KEEPFILTERS ( Pedidos[Entrega Atrasada] IN { TRUE (), FALSE () } )
+			)
+		formatString: #,0
+		displayFolder: 2. Contagens
+		lineageTag: 853550bb-3de9-520c-956a-cb907e518dfe
+
+	/// Entrega ao cliente depois do dia estimado. [F2]
+	measure 'Pedidos com Entrega Atrasada' =
+			CALCULATE (
+			    COUNTROWS ( Pedidos ),
+			    KEEPFILTERS ( Pedidos[Entrega Atrasada] = TRUE () )
+			)
+		formatString: #,0
+		displayFolder: 2. Contagens
+		lineageTag: 82fd760a-766c-5ee8-813d-e12feb576c74
+
+	/// Numerador do KPI02: soma do frete dos itens.
+	measure 'Frete Total' = SUM ( Itens[Frete] )
+		formatString: R$ #,0.00
+		displayFolder: 3. Valores (R$)
+		lineageTag: c6f4d9e7-b4ea-5033-8ef3-6698b035bd8e
+
+	/// Denominador do KPI02: soma do preço dos itens.
+	measure 'Valor dos Produtos' = SUM ( Itens[Preço] )
+		formatString: R$ #,0.00
+		displayFolder: 3. Valores (R$)
+		lineageTag: 86973684-c2fe-591c-99bf-f46350e85a34
+
+	/// Soma linha a linha de preço + frete do item (expressão por linha, por isso SUMX). [F4]
+	measure 'Valor Pago Produtos mais Frete' = SUMX ( Itens, Itens[Preço] + Itens[Frete] )
+		formatString: R$ #,0.00
+		displayFolder: 3. Valores (R$)
+		lineageTag: cd795548-6527-5ea7-aedf-2cf475e58ed6
+
+	/// Alvo: pedidos com nota 1–2 ÷ pedidos avaliados. [F1]
+	measure 'KPI01 % Avaliações Ruins' = DIVIDE ( [Pedidos com Avaliação Ruim], [Pedidos Avaliados] )
+		formatString: 0.0%
+		displayFolder: 1. KPIs oficiais
+		lineageTag: ff941700-6c0b-5da4-94c6-0fa7535a4976
+
+	/// Restrição: frete ÷ valor dos produtos (itens dos pedidos entregues). [F1]
+	measure 'KPI02 % Frete sobre Produtos' = DIVIDE ( [Frete Total], [Valor dos Produtos] )
+		formatString: 0.0%
+		displayFolder: 1. KPIs oficiais
+		lineageTag: 43e0fdab-04ff-53d3-88f5-02cba6860074
+
+	/// Alavanca: pedidos postados no prazo ÷ pedidos elegíveis. [F1]
+	measure 'KPI03 % Postagem no Prazo' = DIVIDE ( [Pedidos Postados no Prazo], [Pedidos Elegíveis para Postagem] )
+		formatString: 0.0%
+		displayFolder: 1. KPIs oficiais
+		lineageTag: 34dbc1ab-7173-5d06-b79d-3f9c09f5cde6
+
+	/// Pedidos com entrega atrasada ÷ pedidos com entrega avaliável. [F1]
+	measure '% Entrega Atrasada' = DIVIDE ( [Pedidos com Entrega Atrasada], [Pedidos com Entrega Avaliável] )
+		formatString: 0.0%
+		displayFolder: 4. Diagnóstico
+		lineageTag: a69ec9dd-5663-57db-8ed3-07bbc36cb5c3
+
+	/// Média da nota por pedido avaliado (pedidos sem avaliação não entram). [F4]
+	measure 'Nota Média de Avaliação' =
+			AVERAGEX (
+			    FILTER ( Pedidos, NOT ISBLANK ( Pedidos[Nota Avaliação] ) ),
+			    Pedidos[Nota Avaliação]
+			)
+		formatString: 0.00
+		displayFolder: 4. Diagnóstico
+		lineageTag: f5bd8725-faa6-5810-b2e1-f4386138f6ec
+
+	/// Média por pedido do trecho postagem → cliente. [F4]
+	measure 'Média de Dias Postagem até Entrega' =
+			AVERAGEX (
+			    FILTER ( Pedidos, NOT ISBLANK ( Pedidos[Dias Postagem até Entrega] ) ),
+			    Pedidos[Dias Postagem até Entrega]
+			)
+		formatString: 0.0
+		displayFolder: 4. Diagnóstico
+		lineageTag: b1e383a4-87ef-5e07-9a2d-20bb466a087d
+
+	/// KPI01 sem filtros de UF/região (ALL), mantendo período e demais filtros. Referência nacional para comparar cortes. [F3]
+	measure 'KPI01 Todas as Regiões' = CALCULATE ( [KPI01 % Avaliações Ruins], ALL ( 'Local Cliente' ) )
+		formatString: 0.0%
+		displayFolder: 4. Diagnóstico
+		lineageTag: 3f26e267-3166-51bd-b54f-a64682b0105d
+
+	/// Diferença em pontos percentuais entre o corte atual e a referência nacional. [F1]
+	measure 'KPI01 Desvio vs Todas as Regiões (p.p.)' =
+			VAR Atual = [KPI01 % Avaliações Ruins]
+			VAR Nacional = [KPI01 Todas as Regiões]
+			RETURN
+			    IF ( NOT ISBLANK ( Atual ), ( Atual - Nacional ) * 100 )
+		formatString: +0.0;-0.0;0.0
+		displayFolder: 4. Diagnóstico
+		lineageTag: 682f1011-bad3-5e92-86f7-1d801220c716
+
+	/// (Taxa do corte − taxa nacional) × avaliados do corte. REMOVEFILTERS tira UF/região para obter a taxa nacional. Vazio quando o corte está na média ou abaixo. [F3]
+	measure 'Pedidos Ruins acima da Média' =
+			VAR TaxaNacional =
+			    CALCULATE ( [KPI01 % Avaliações Ruins], REMOVEFILTERS ( 'Local Cliente' ) )
+			VAR Excedente =
+			    ( [KPI01 % Avaliações Ruins] - TaxaNacional ) * [Pedidos Avaliados]
+			RETURN
+			    IF ( Excedente > 0, Excedente )
+		formatString: #,0
+		displayFolder: 4. Diagnóstico
+		lineageTag: 67cbd8c4-53c9-52fa-b0a6-d5c6a70cfe52
+
+	/// Cor da coluna: crítico quando o frete do corte passa do limite do KPI geral. [F6]
+	measure 'Cor Frete Região' =
+			VAR Frete = [KPI02 % Frete sobre Produtos]
+			RETURN
+			    SWITCH ( TRUE (), ISBLANK ( Frete ), "#a8a69d", Frete > [Limite Frete KPI02], "#d03b3b", "#a8a69d" )
+		displayFolder: 4. Diagnóstico
+		lineageTag: 3dc169f2-622c-597e-97a4-e77e3c7d08c1
+
+	/// Pares pedido × seller com data de postagem e prazo (não são pedidos únicos). [F2]
+	measure 'Pares Pedido-Seller Elegíveis' =
+			CALCULATE (
+			    COUNTROWS ( 'Pedido Seller' ),
+			    KEEPFILTERS ( 'Pedido Seller'[Postagem Elegível] = TRUE () )
+			)
+		formatString: #,0
+		displayFolder: 5. Sellers
+		lineageTag: eda287ed-14aa-5c0c-ae8e-f91b97250316
+
+	/// Pares pedido × seller com postagem depois do prazo limite. [F2]
+	measure 'Postagens Atrasadas' =
+			CALCULATE (
+			    COUNTROWS ( 'Pedido Seller' ),
+			    KEEPFILTERS ( 'Pedido Seller'[Postagem Elegível] = TRUE () ),
+			    KEEPFILTERS ( 'Pedido Seller'[Postagem Atrasada] = TRUE () )
+			)
+		formatString: #,0
+		displayFolder: 5. Sellers
+		lineageTag: 01b903d5-43bf-5286-a50a-d09f215d4b82
+
+	/// 1 − postagens atrasadas ÷ pares elegíveis do seller. [F1]
+	measure '% Postagem no Prazo do Seller' =
+			VAR Elegiveis = [Pares Pedido-Seller Elegíveis]
+			RETURN
+			    IF ( Elegiveis > 0, 1 - DIVIDE ( [Postagens Atrasadas], Elegiveis, 0 ) )
+		formatString: 0.0%
+		displayFolder: 5. Sellers
+		lineageTag: 8834bd70-6dbc-5ad3-84a6-35a7b61cb82d
+
+	/// Postagens atrasadas do seller ÷ todas as postagens atrasadas do período e da região selecionados. REMOVEFILTERS ( Sellers ) tira o seller da linha e o filtro top 10 do visual (ALLSELECTED manteria o top 10 no denominador). [F3]
+	measure '% Participação nas Postagens Atrasadas' =
+			DIVIDE (
+			    [Postagens Atrasadas],
+			    CALCULATE ( [Postagens Atrasadas], REMOVEFILTERS ( Sellers ) )
+			)
+		formatString: 0.0%
+		displayFolder: 5. Sellers
+		lineageTag: 0fc63b0d-50e1-5318-9caf-24aa27e9bc32
+
+	/// Posição do seller por postagens atrasadas entre os sellers da seleção (ALLSELECTED de Sellers: respeita slicers, ignora a UF da linha) com pelo menos 30 pares elegíveis; desempate pela % atrasada. [F4]
+	measure 'Ranking Seller por Postagens Atrasadas' =
+			VAR MinimoPares = 30
+			VAR Candidatos =
+			    CALCULATETABLE (
+			        FILTER (
+			            ADDCOLUMNS (
+			                VALUES ( Sellers[Seller] ),
+			                "@Pares", [Pares Pedido-Seller Elegíveis],
+			                "@Pontuacao", [Postagens Atrasadas] + DIVIDE ( [Postagens Atrasadas], [Pares Pedido-Seller Elegíveis], 0 ) / 10
+			            ),
+			            [@Pares] >= MinimoPares
+			        ),
+			        ALLSELECTED ( Sellers )
+			    )
+			VAR PontuacaoAtual =
+			    [Postagens Atrasadas] + DIVIDE ( [Postagens Atrasadas], [Pares Pedido-Seller Elegíveis], 0 ) / 10
+			RETURN
+			    IF (
+			        ISINSCOPE ( Sellers[Seller] ) && [Pares Pedido-Seller Elegíveis] >= MinimoPares,
+			        RANKX ( Candidatos, [@Pontuacao], PontuacaoAtual, DESC, DENSE )
+			    )
+		formatString: 0
+		displayFolder: 5. Sellers
+		lineageTag: d0fc993f-9e07-5f8a-ae3d-44729d616d22
+
+	/// KPI01 acumulado de janeiro até o mês do contexto (TOTALYTD no numerador e no denominador). [F5]
+	measure 'KPI01 Acumulado no Ano' =
+			DIVIDE (
+			    TOTALYTD ( [Pedidos com Avaliação Ruim], 'Calendário'[Data] ),
+			    TOTALYTD ( [Pedidos Avaliados], 'Calendário'[Data] )
+			)
+		formatString: 0.0%
+		displayFolder: 6. Tempo
+		lineageTag: b20d4814-704b-54a6-8bc7-a33de8175b50
+
+	/// KPI01 no mesmo período do ano anterior (2025 proxy → 2024 proxy; ambos só têm jan–ago). [F5]
+	measure 'KPI01 Período Anterior' = CALCULATE ( [KPI01 % Avaliações Ruins], SAMEPERIODLASTYEAR ( 'Calendário'[Data] ) )
+		formatString: 0.0%
+		displayFolder: 6. Tempo
+		lineageTag: 25e81660-895a-5f02-8554-efd09e82bbce
+
+	/// Diferença em p.p. contra o mesmo período do ano anterior. [F5]
+	measure 'KPI01 Variação vs Período Anterior (p.p.)' =
+			VAR Atual = [KPI01 % Avaliações Ruins]
+			VAR Anterior = [KPI01 Período Anterior]
+			RETURN
+			    IF ( NOT ISBLANK ( Atual ) && NOT ISBLANK ( Anterior ), ( Atual - Anterior ) * 100 )
+		formatString: +0.0;-0.0;0.0
+		displayFolder: 6. Tempo
+		lineageTag: c9e966a4-32bb-54e8-baee-c9e985de6556
+
+	/// KPI02 deslocado 1 ano (DATEADD). [F5]
+	measure 'KPI02 Período Anterior' = CALCULATE ( [KPI02 % Frete sobre Produtos], DATEADD ( 'Calendário'[Data], -1, YEAR ) )
+		formatString: 0.0%
+		displayFolder: 6. Tempo
+		lineageTag: 6980b36c-c7b2-5aa4-8fa5-85c8a4c5d3aa
+
+	/// Diferença em p.p. contra o ano anterior. [F5]
+	measure 'KPI02 Variação vs Período Anterior (p.p.)' =
+			VAR Atual = [KPI02 % Frete sobre Produtos]
+			VAR Anterior = [KPI02 Período Anterior]
+			RETURN
+			    IF ( NOT ISBLANK ( Atual ) && NOT ISBLANK ( Anterior ), ( Atual - Anterior ) * 100 )
+		formatString: +0.0;-0.0;0.0
+		displayFolder: 6. Tempo
+		lineageTag: 5937a014-8e65-5ded-8c49-d1fcc5749d80
+
+	/// KPI03 deslocado 1 ano (DATEADD). [F5]
+	measure 'KPI03 Período Anterior' = CALCULATE ( [KPI03 % Postagem no Prazo], DATEADD ( 'Calendário'[Data], -1, YEAR ) )
+		formatString: 0.0%
+		displayFolder: 6. Tempo
+		lineageTag: f44e16bd-ef5b-529b-adc3-35c010004096
+
+	/// Diferença em p.p. contra o ano anterior. [F5]
+	measure 'KPI03 Variação vs Período Anterior (p.p.)' =
+			VAR Atual = [KPI03 % Postagem no Prazo]
+			VAR Anterior = [KPI03 Período Anterior]
+			RETURN
+			    IF ( NOT ISBLANK ( Atual ) && NOT ISBLANK ( Anterior ), ( Atual - Anterior ) * 100 )
+		formatString: +0.0;-0.0;0.0
+		displayFolder: 6. Tempo
+		lineageTag: cea0cd35-3d2c-58eb-bb19-482884b47e79
+
+	/// Situação do KPI01 frente ao marco de 2026 e à meta de 2027. [F6]
+	measure 'KPI01 Status' =
+			VAR Valor = [KPI01 % Avaliações Ruins]
+			VAR Marco = [Marco 2026 KPI01]
+			VAR Meta = [Meta 2027 KPI01]
+			RETURN
+			    SWITCH (
+			        TRUE (),
+			        ISBLANK ( Valor ), "Sem dados no recorte",
+			        Valor <= Meta, "✔ Já atinge a meta 2027 (≤ 10%)",
+			        Valor <= Marco, "● Dentro do marco 2026; faltam " & FORMAT ( ( Valor - Meta ) * 100, "0.0", "pt-BR" ) & " p.p. para 2027",
+			        "✖ Acima do marco 2026: +" & FORMAT ( ( Valor - Marco ) * 100, "0.0", "pt-BR" ) & " p.p."
+			    )
+		displayFolder: 7. Status
+		lineageTag: d9325598-eed9-5c35-a841-676d1c39a002
+
+	/// Situação do KPI02 frente ao limite de 17,1%. [F6]
+	measure 'KPI02 Status' =
+			VAR Valor = [KPI02 % Frete sobre Produtos]
+			VAR Limite = [Limite Frete KPI02]
+			RETURN
+			    SWITCH (
+			        TRUE (),
+			        ISBLANK ( Valor ), "Sem dados no recorte",
+			        Valor <= Limite, "✔ Dentro do limite: folga de " & FORMAT ( ( Limite - Valor ) * 100, "0.00", "pt-BR" ) & " p.p.",
+			        "✖ Acima do limite: +" & FORMAT ( ( Valor - Limite ) * 100, "0.00", "pt-BR" ) & " p.p."
+			    )
+		displayFolder: 7. Status
+		lineageTag: d33151a9-4f31-5b80-8d70-5ec51be283b0
+
+	/// Situação do KPI03 frente aos marcos de 95% (2026) e 97% (2027). [F6]
+	measure 'KPI03 Status' =
+			VAR Valor = [KPI03 % Postagem no Prazo]
+			VAR Marco = [Marco 2026 KPI03]
+			VAR Meta = [Meta 2027 KPI03]
+			RETURN
+			    SWITCH (
+			        TRUE (),
+			        ISBLANK ( Valor ), "Sem dados no recorte",
+			        Valor >= Meta, "✔ Já atinge a meta 2027 (≥ 97%)",
+			        Valor >= Marco, "● Atinge o marco 2026; faltam " & FORMAT ( ( Meta - Valor ) * 100, "0.0", "pt-BR" ) & " p.p. para 2027",
+			        "✖ Abaixo do marco 2026: faltam " & FORMAT ( ( Marco - Valor ) * 100, "0.0", "pt-BR" ) & " p.p."
+			    )
+		displayFolder: 7. Status
+		lineageTag: 27c5471b-1e1c-5421-91f7-59e84adbba84
+
+	/// Cor semântica do status do KPI01 (acompanha o texto do status). [F6]
+	measure 'KPI01 Cor Status' =
+			VAR Valor = [KPI01 % Avaliações Ruins]
+			RETURN
+			    SWITCH ( TRUE (), ISBLANK ( Valor ), "#898781", Valor <= [Meta 2027 KPI01], "#006300", Valor <= [Marco 2026 KPI01], "#9a6700", "#d03b3b" )
+		displayFolder: 7. Status
+		lineageTag: fa43db83-bb10-5ff4-8c6d-57df49bcc204
+
+	/// Cor semântica do status do KPI02. [F6]
+	measure 'KPI02 Cor Status' =
+			VAR Valor = [KPI02 % Frete sobre Produtos]
+			RETURN
+			    SWITCH ( TRUE (), ISBLANK ( Valor ), "#898781", Valor <= [Limite Frete KPI02], "#006300", "#d03b3b" )
+		displayFolder: 7. Status
+		lineageTag: 542b8195-1338-5792-8fbc-6c3d448ea907
+
+	/// Cor semântica do status do KPI03. [F6]
+	measure 'KPI03 Cor Status' =
+			VAR Valor = [KPI03 % Postagem no Prazo]
+			RETURN
+			    SWITCH ( TRUE (), ISBLANK ( Valor ), "#898781", Valor >= [Meta 2027 KPI03], "#006300", Valor >= [Marco 2026 KPI03], "#9a6700", "#d03b3b" )
+		displayFolder: 7. Status
+		lineageTag: 4df1e22d-df07-5929-a4b5-041e80dfea24
+
+	/// Linha de contexto do cartão: variação vs período anterior e referência da proposta. [F6]
+	measure 'KPI01 Contexto' =
+			VAR Variacao = [KPI01 Variação vs Período Anterior (p.p.)]
+			RETURN
+			    "vs ano anterior: "
+			        & IF ( ISBLANK ( Variacao ), "n/d", FORMAT ( Variacao, "+0.0;-0.0;0.0", "pt-BR" ) & " p.p." )
+			        & "  ·  proposta 2025: " & FORMAT ( [Referência Proposta 2025 KPI01], "0.0%", "pt-BR" )
+		displayFolder: 7. Status
+		lineageTag: fddf9e91-a85a-5ab7-9c89-127dd78ac736
+
+	/// Linha de contexto do cartão: variação vs período anterior e referência da proposta. [F6]
+	measure 'KPI02 Contexto' =
+			VAR Variacao = [KPI02 Variação vs Período Anterior (p.p.)]
+			RETURN
+			    "vs ano anterior: "
+			        & IF ( ISBLANK ( Variacao ), "n/d", FORMAT ( Variacao, "+0.0;-0.0;0.0", "pt-BR" ) & " p.p." )
+			        & "  ·  proposta 2025: " & FORMAT ( [Referência Proposta 2025 KPI02], "0.0%", "pt-BR" )
+		displayFolder: 7. Status
+		lineageTag: 8e067569-6a3d-5449-9fd9-2db12c250e27
+
+	/// Linha de contexto do cartão: variação vs período anterior e referência da proposta. [F6]
+	measure 'KPI03 Contexto' =
+			VAR Variacao = [KPI03 Variação vs Período Anterior (p.p.)]
+			RETURN
+			    "vs ano anterior: "
+			        & IF ( ISBLANK ( Variacao ), "n/d", FORMAT ( Variacao, "+0.0;-0.0;0.0", "pt-BR" ) & " p.p." )
+			        & "  ·  proposta 2025: " & FORMAT ( [Referência Proposta 2025 KPI03], "0.0%", "pt-BR" )
+		displayFolder: 7. Status
+		lineageTag: a01e908d-ebbd-58a6-9be1-618f4f5ba9f1
+
+	/// Marco 2026 e meta 2027 do KPI01 em texto. [F6]
+	measure 'KPI01 Metas' = "Marco 2026: " & FORMAT ( [Marco 2026 KPI01], "0.0%", "pt-BR" ) & "  ·  Meta 2027: " & FORMAT ( [Meta 2027 KPI01], "0.0%", "pt-BR" )
+		displayFolder: 7. Status
+		lineageTag: b7c99aa8-80fe-5b12-85b9-2a41bcf99778
+
+	/// Limite do KPI02 em texto. [F6]
+	measure 'KPI02 Metas' = "Limite 2026 e 2027: ≤ " & FORMAT ( [Limite Frete KPI02], "0.0%", "pt-BR" ) & " (KPI geral)"
+		displayFolder: 7. Status
+		lineageTag: ddd2ba56-a094-5ce3-9c99-ebdc37d4ddca
+
+	/// Marco 2026 e meta 2027 do KPI03 em texto. [F6]
+	measure 'KPI03 Metas' = "Marco 2026: " & FORMAT ( [Marco 2026 KPI03], "0.0%", "pt-BR" ) & "  ·  Meta 2027: " & FORMAT ( [Meta 2027 KPI03], "0.0%", "pt-BR" )
+		displayFolder: 7. Status
+		lineageTag: e3dbee7b-9c7c-515f-98bd-d3ce0da2ef07
+
+	column Auxiliar
+		dataType: string
+		isHidden
+		lineageTag: 7b437187-74c0-50cc-b6d7-c22b81a055fc
+		summarizeBy: none
+		sourceColumn: Auxiliar
+
+	partition Medidas = m
+		mode: import
+		source =
+				let
+				    Fonte = #table(type table [Auxiliar = text], {})
+				in
+				    Fonte
+
+	annotation PBI_ResultType = Table

@@ -1,0 +1,5 @@
+/// Pasta com os CSVs do modelo (termina com barra invertida). Altere em Transformar dados > Parâmetros.
+expression PastaDados = "C:\Users\gmsgu\Downloads\archive (1)\entregaveis\powerbi\dados\" meta [IsParameterQuery = true, Type = "Text", IsParameterQueryRequired = true]
+	lineageTag: 62a2ed44-aa8f-5638-a154-2e52ae57163a
+
+	annotation PBI_ResultType = Text

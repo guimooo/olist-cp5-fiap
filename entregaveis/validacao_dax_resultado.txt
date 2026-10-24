@@ -1,0 +1,94 @@
+servidor localhost:50675  banco c57ced7c-242d-40c0-96ab-b8a69a90e17e
+
+### -- V01 KPIs por período (F1 DIVIDE, F2 contagens) vs kpi_resumo_periodo.csv
+Calendário[Ano Original] | [Pedidos Entregues] | [Pedidos Avaliados] | [Pedidos Ruins] | [KPI01] | [Frete] | [Produtos] | [KPI02] | [Elegiveis] | [No Prazo] | [KPI03] | [Entrega Atrasada]
+2018 | 52783 | 52468 | 7016 | 0.13372 | 1233459.65 | 7218125.12 | 0.170884 | 52783 | 48271 | 0.914518 | 0.077269
+2017 | 21998 | 21837 | 2312 | 0.105875 | 479442.12 | 2993456.13 | 0.160163 | 21997 | 20103 | 0.913897 | 0.034959
+
+### -- V02 Inteligência de tempo (F5) no contexto de 2018: anterior deve ser igual ao valor de 2017
+[KPI01 2018] | [KPI01 Período Anterior (SAMEPERIODLASTYEAR)] | [KPI01 Variação pp] | [KPI02 Período Anterior (DATEADD)] | [KPI02 Variação pp] | [KPI03 Período Anterior (DATEADD)] | [KPI03 Variação pp]
+0.13372 | 0.105875 | 2.784425 | 0.160163 | 1.072026 | 0.913897 | 0.062058
+
+### -- V03 TOTALYTD (F5): acumulado no ano por mês de 2018; agosto deve igualar o KPI01 de 2018
+Calendário[Mês Número] | [KPI01 Mês] | [KPI01 Acumulado no Ano] | [Entrega Atrasada]
+8 | 0.095419 | 0.13372 | 0.06188
+3 | 0.21186 | 0.180477 | 0.189633
+7 | 0.096716 | 0.138974 | 0.033788
+5 | 0.107557 | 0.153586 | 0.065639
+2 | 0.193791 | 0.164349 | 0.141266
+1 | 0.137031 | 0.137031 | 0.057009
+4 | 0.117891 | 0.164952 | 0.045013
+6 | 0.099918 | 0.145438 | 0.011647
+9 | (vazio) | 0.13372 | (vazio)
+10 | (vazio) | 0.13372 | (vazio)
+11 | (vazio) | 0.13372 | (vazio)
+12 | (vazio) | 0.13372 | (vazio)
+
+### -- V04 Contexto de filtro (F3 ALL / REMOVEFILTERS) e F4 por UF, 2018, top 6 por excedente
+Local Cliente[UF] | [Avaliados] | [KPI01] | [KPI01 Todas as Regiões (ALL)] | [Desvio pp] | [Ruins acima da média (REMOVEFILTERS)] | [Entrega Atrasada]
+ES | 1035 | 0.150725 | 0.13372 | 1.700504 | 17.600213 | 0.137536
+MA | 344 | 0.203488 | 0.13372 | 6.976877 | 24.000457 | 0.199422
+PA | 442 | 0.208145 | 0.13372 | 7.44252 | 32.895937 | 0.165563
+RJ | 6279 | 0.201784 | 0.13372 | 6.806412 | 427.374628 | 0.137338
+BA | 1713 | 0.176883 | 0.13372 | 4.316306 | 73.938324 | 0.140788
+CE | 629 | 0.203498 | 0.13372 | 6.977801 | 43.890371 | 0.191153
+
+### -- V05 Frete por região 2018 (KPI02 regional + cor F6) vs kpi_regiao.csv
+Local Cliente[Região] | [Pedidos] | [KPI02] | [KPI01] | [Limite] | [Cor]
+Sudeste | 36803 | 0.155173 | 0.129565 | 0.171 | #a8a69d
+Sul | 7332 | 0.182992 | 0.123629 | 0.171 | #d03b3b
+Nordeste | 4669 | 0.226802 | 0.174504 | 0.171 | #d03b3b
+Centro-Oeste | 3113 | 0.188282 | 0.133957 | 0.171 | #d03b3b
+Norte | 866 | 0.238528 | 0.175644 | 0.171 | #d03b3b
+
+### -- V06 Cruzamento postagem x entrega 2018 vs relacao_atraso_avaliacao.csv
+Pedidos[Situação Postagem] | Pedidos[Situação Entrega] | [Avaliados] | [Ruins] | [KPI01]
+Postagem no prazo | Entrega no prazo | 44988 | 4030 | 0.089579
+Postagem atrasada | Entrega no prazo | 3480 | 471 | 0.135345
+Postagem no prazo | Entrega atrasada | 3005 | 1887 | 0.627953
+Postagem atrasada | Entrega atrasada | 989 | 627 | 0.633974
+Postagem no prazo | Sem dado | 5 | 1 | 0.2
+Postagem atrasada | Sem dado | 1 | (vazio) | (vazio)
+
+### -- V07 Ranking de sellers 2018 (F4 RANKX + F3 ALLSELECTED; UF na linha não pode quebrar o ranking), top 10
+Sellers[Seller] | Sellers[UF Seller] | [Pares] | [Atrasadas] | [No prazo] | [Participação (REMOVEFILTERS Sellers)] | [Ranking (RANKX)]
+Seller 7c67e144 | SP | 478 | 164 | 0.656904 | 0.036267 | 1
+Seller 06a2c3af | MA | 389 | 121 | 0.688946 | 0.026758 | 2
+Seller 88460e8e | PR | 231 | 111 | 0.519481 | 0.024547 | 3
+Seller 1025f0e2 | SP | 677 | 90 | 0.867061 | 0.019903 | 4
+Seller 7d13fca1 | SP | 558 | 83 | 0.851254 | 0.018355 | 5
+Seller 1f50f920 | SP | 617 | 78 | 0.873582 | 0.017249 | 6
+Seller 3d871de0 | SP | 447 | 69 | 0.845638 | 0.015259 | 7
+Seller c70c1b0d | SP | 260 | 61 | 0.765385 | 0.01349 | 8
+Seller 2eb70248 | SP | 187 | 60 | 0.679144 | 0.013268 | 9
+Seller ea8482cd | SP | 795 | 59 | 0.925786 | 0.013047 | 10
+
+### -- V08 Soma do top 10 do ranking em 2018 (deve dar 896 de 4.522)
+[Sellers no top] | [Atrasadas top10] | [Atrasadas total] | [Pares top10] | [Pares total]
+10 | 896 | 4522 | 4639 | 53622
+
+### -- V09 Iteradoras (F4 SUMX, AVERAGEX) por período; SUMX deve igualar Frete + Produtos
+Calendário[Ano Original] | [Valor Pago (SUMX)] | [Frete + Produtos (SUM)] | [Nota Média (AVERAGEX)] | [Dias postagem-entrega (AVERAGEX)]
+2017 | 3472898.25 | 3472898.25 | 4.23277 | 8.984457
+2018 | 8451584.77 | 8451584.77 | 4.141686 | 9.136338
+
+### -- V10 Status (F6 VAR/RETURN + SWITCH(TRUE())) por período
+Calendário[Período] | [KPI01 Status] | [KPI02 Status] | [KPI03 Status] | [Cores]
+2024 (proxy jan–ago/2017) | ● Dentro do marco 2026; faltam 0,6 p.p. para 2027 | ✔ Dentro do limite: folga de 1,08 p.p. | ✖ Abaixo do marco 2026: faltam 3,6 p.p. | #9a6700 #006300 #d03b3b
+2025 (proxy jan–ago/2018) | ✖ Acima do marco 2026: +1,4 p.p. | ✔ Dentro do limite: folga de 0,01 p.p. | ✖ Abaixo do marco 2026: faltam 3,5 p.p. | #d03b3b #006300 #d03b3b
+
+### -- V12 DIVIDE com denominador zero/vazio: recorte sem dados (set/2018) deve retornar vazio, sem erro
+[KPI01] | [KPI02] | [KPI03] | [Status]
+(vazio) | (vazio) | (vazio) | Sem dados no recorte
+
+### -- V13 Participação (REMOVEFILTERS Sellers) mantém o filtro de região: soma dentro do Nordeste = 100%
+[Soma participação] | [Atrasadas Nordeste]
+1 | 413
+
+### -- V14 RANKX com ALLSELECTED respeita o filtro de região: top 5 dentro do Nordeste (sellers ranqueados só entre os pedidos de clientes do NE)
+Sellers[Seller] | [Pares] | [Atrasadas] | [Ranking]
+Seller 06a2c3af | 75 | 25 | 1
+Seller 7c67e144 | 45 | 19 | 2
+Seller 7d13fca1 | 65 | 11 | 3
+Seller 8b321bb6 | 94 | 10 | 5
+Seller 1f50f920 | 61 | 10 | 4
